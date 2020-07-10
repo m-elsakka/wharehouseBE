@@ -40,7 +40,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             String requestBody = null;
             requestBody = IOUtils.toString(req.getReader());
             Users user = new ObjectMapper().readValue(requestBody, Users.class);
-            return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUser_name().trim(),
+            return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUserName().trim(),
                     user.getPassword(), new ArrayList<>()));
         } catch (IOException e) {
             throw new RuntimeException(e);

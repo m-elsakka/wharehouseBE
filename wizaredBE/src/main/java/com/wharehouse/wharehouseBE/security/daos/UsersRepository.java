@@ -13,7 +13,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface UsersRepository extends GenericJPARepository<Users> {
 
-    @Query("SELECT u FROM Users u WHERE UPPER(TRIM(u.user_name))=UPPER(TRIM(:user_name))")
-    public Optional<Users> findByUsername(@Param("user_name") String user_name);
+    @Query("SELECT u FROM Users u WHERE UPPER(TRIM(u.userName))=UPPER(TRIM(:userName))")
+    public Optional<Users> findByUsername(@Param("userName") String user_name);
 
 }

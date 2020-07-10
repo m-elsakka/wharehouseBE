@@ -15,12 +15,10 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -41,7 +39,7 @@ public class Users extends CrudBaseEntity implements Serializable {
     @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "user_name")
-    private String user_name;
+    private String userName;
 
     @Column(name = "password")
     private String password;
@@ -62,7 +60,7 @@ public class Users extends CrudBaseEntity implements Serializable {
 //    private String jobDescription;
 //
     @Column(name = "user_level")
-   private Integer userLevelId;
+    private Integer userLevelId;
 
     @JoinColumn(name = "user_level", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
@@ -96,7 +94,6 @@ public class Users extends CrudBaseEntity implements Serializable {
 //
 //    @Column(name = "is_s2_account")
 //    private short isS2Account;
-
     @Transient
     private boolean activeFlag;
 
@@ -133,17 +130,17 @@ public class Users extends CrudBaseEntity implements Serializable {
         this.changePassword = changePassword;
     }
 
-    public Users(Long id, String user_name, String password) {
-        this.user_name = user_name;
+    public Users(Long id, String userName, String password) {
+        this.userName = userName;
         this.password = password;
     }
 
-    public String getUser_name() {
-        return user_name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public short getIsAdmin() {
@@ -162,6 +159,7 @@ public class Users extends CrudBaseEntity implements Serializable {
 //        this.jobDescription = jobDescription;
 //    }
 //
+
     public Integer getUserLevelId() {
         return userLevelId;
     }
@@ -170,6 +168,7 @@ public class Users extends CrudBaseEntity implements Serializable {
         this.userLevelId = userLevelId;
     }
 //
+
     public UserLevel getUserLevel() {
         return userLevel;
     }
@@ -210,7 +209,6 @@ public class Users extends CrudBaseEntity implements Serializable {
 //    public void setBranchNo(String branchNo) {
 //        this.branchNo = branchNo;
 //    }
-
     public static Integer findLineManagerLevel(int level) {
         Integer lineManagerLevel = null;
         if (level == UserLevelEnum.TEAM_LEAD.getLevelNumber()) {
@@ -227,6 +225,7 @@ public class Users extends CrudBaseEntity implements Serializable {
         return firstName;
     }
 //
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -262,12 +261,10 @@ public class Users extends CrudBaseEntity implements Serializable {
 //    public void setIsS2Account(short isS2Account) {
 //        this.isS2Account = isS2Account;
 //    }
-
 //    public boolean isIsS2AccountFlag() {
 //        this.isS2AccountFlag = this.getIsS2Account() == 1;
 //        return isS2AccountFlag;
 //    }
-
     public void setIsS2AccountFlag(boolean isS2AccountFlag) {
         this.isS2AccountFlag = isS2AccountFlag;
     }
@@ -276,7 +273,6 @@ public class Users extends CrudBaseEntity implements Serializable {
 //        this.activeFlag = this.getActive() == 1;
 //        return activeFlag;
 //    }
-
     public void setActiveFlag(boolean activeFlag) {
         this.activeFlag = activeFlag;
     }
@@ -293,7 +289,7 @@ public class Users extends CrudBaseEntity implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (user_name != null ? user_name.hashCode() : 0);
+        hash += (userName != null ? userName.hashCode() : 0);
         return hash;
     }
 
@@ -304,7 +300,7 @@ public class Users extends CrudBaseEntity implements Serializable {
             return false;
         }
         Users other = (Users) object;
-        if ((this.id == null && other.getId()!= null) || (this.id != null && !this.id.equals(other.getId()))) {
+        if ((this.id == null && other.getId() != null) || (this.id != null && !this.id.equals(other.getId()))) {
             return false;
         }
         return true;
