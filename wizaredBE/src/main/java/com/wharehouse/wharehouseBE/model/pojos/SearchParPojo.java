@@ -10,7 +10,7 @@ import java.util.List;
 
 public class SearchParPojo {
 
-    private Integer page;
+     private Integer page;
     private Integer size;
     private List<FilterPojo> filtersList = new ArrayList<>();
     private SortPojo sortObject;
