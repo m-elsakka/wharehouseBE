@@ -18,7 +18,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,7 +33,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class AuthSuccessHandler implements AuthenticationSuccessHandler {
-    
+
 //    @Autowired
 //    UsersService userService;
     @Autowired
@@ -95,7 +94,7 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
             userLoginResponse.setFullName(fullName);
             userLoginResponse.setId(customUser.getId());
             List authorities = new ArrayList(customUser.getAuthorities());
-            //userLoginResponse.setAuthorities(authorities);
+            userLoginResponse.setAuthorities(authorities);
             responsePojo.setSuccess(true);
             responsePojo.setData(userLoginResponse);
         }
@@ -113,9 +112,8 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
         }
         return hasAuthority;
     }
-    
-    private void createTokenInDB(String token)
-    {
+
+    private void createTokenInDB(String token) {
         Tokens validateToken = new Tokens();
         validateToken.setToken(token);
         validateToken.setUserName(JWTUtil.getUsernameFromToken(token, ConstantStrings.SIGNING_KEY));

@@ -137,7 +137,7 @@
 
 
     <build>
-        <finalName>wharehouseBE-${version}</finalName>
+        <finalName>wharehouseBE</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -145,8 +145,8 @@
             </plugin>
         </plugins>
     </build>
-    
-    
+
+
     <pluginRepositories>
         <pluginRepository>
             <id>central</id>
@@ -234,5 +234,5 @@
             </dependencies>
         </profile>
     </profiles>-->
-  
+
 </project>

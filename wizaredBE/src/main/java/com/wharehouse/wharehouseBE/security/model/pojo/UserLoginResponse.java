@@ -1,5 +1,6 @@
 package com.wharehouse.wharehouseBE.security.model.pojo;
 
+import com.wharehouse.wharehouseBE.security.model.entities.Authority;
 import java.util.List;
 
 public class UserLoginResponse {
@@ -7,7 +8,7 @@ public class UserLoginResponse {
     private String token;
     private String fullName;
     private Long id;
-   // private List<Authority> authorities;
+    private List<Authority> authorities;
 
     public UserLoginResponse() {
     }
@@ -35,12 +36,12 @@ public class UserLoginResponse {
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
-//
-//    public List<Authority> getAuthorities() {
-//        return authorities;
-//    }
-//
-//    public void setAuthorities(List<Authority> authorities) {
-//        this.authorities = authorities;
-//    }
+
+    public List<Authority> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(List<Authority> authorities) {
+        this.authorities = authorities;
+    }
 }

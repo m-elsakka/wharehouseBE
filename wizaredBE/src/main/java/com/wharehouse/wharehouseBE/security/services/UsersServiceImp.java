@@ -8,10 +8,7 @@ package com.wharehouse.wharehouseBE.security.services;
 import com.wharehouse.wharehouseBE.exceptions.BusinessException;
 import com.wharehouse.wharehouseBE.security.daos.UsersRepository;
 import com.wharehouse.wharehouseBE.security.model.entities.Users;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -32,7 +29,6 @@ public class UsersServiceImp implements UsersService {
 //
 //    @Autowired
 //    private UserAuthorityRepositiry userAuthorityRepositiry;
-
     @Override
     public Users save(Users user) {
 //        List<Long> authorityIdList = user.getAuthorities().stream()
@@ -51,7 +47,7 @@ public class UsersServiceImp implements UsersService {
 
         }
         Users SavedUser = userRepository.save(user);
-       // manageUserRoles(SavedUser, authorityIdList);
+        // manageUserRoles(SavedUser, authorityIdList);
         return SavedUser;
     }
 
@@ -69,14 +65,14 @@ public class UsersServiceImp implements UsersService {
 
     @Override
     public Users checkUserAccount(Users userObj) throws BusinessException {
-        if (userObj.getUser_name()== null) {
+        if (userObj.getUserName() == null) {
             throw new BusinessException("fill user name");
         }
         if (userObj.getPassword() == null) {
             throw new BusinessException("fill password");
         }
 
-        String userName = userObj.getUser_name().trim();
+        String userName = userObj.getUserName().trim();
         String password = userObj.getPassword().trim();
 
         Optional<Users> userOptional = findByUsername(userName);
@@ -105,7 +101,6 @@ public class UsersServiceImp implements UsersService {
 //            throw new BusinessException("invalid password length min 6");
 //        }
 //    }
-
 //    @Override
 //    public String changePassword(ChangePassword changePW) throws BusinessException {
 //        //check
@@ -129,7 +124,6 @@ public class UsersServiceImp implements UsersService {
 //
 //        return JWTUtil.generateToken(userObj.getUserName(), userObj.getAuthorities().toArray());
 //    }
-
     private String bcryptEncodeString(String text) {
         return bcryptEncoder.encode(text);
     }
