@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping("branches")
+@RequestMapping("masterdata/branchs")
 public class BranchController extends BaseRestController<Branch>{
     
 }

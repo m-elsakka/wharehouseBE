@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping("items")
+@RequestMapping("masterdata/item")
 public class ItemController extends BaseRestController<Item>{
 
     public ItemController() {
