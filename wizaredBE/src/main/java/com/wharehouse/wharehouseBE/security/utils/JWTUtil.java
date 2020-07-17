@@ -28,8 +28,10 @@ import org.apache.commons.codec.binary.Base64;
  */
 public class JWTUtil {
 
-    static SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
+      static SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
     public static final String DEFAULT_KEY = "YnZjeGJ2Y3hidmNJTG92ZVNlY3VyaXR5ZmFld29pamV3ZXdxcmV3";
+    public static final String MOBILE_INFO = "AGENT_INFO";
+    public static final String MOBILE_RES_HEADER_KEY = "mobile_login_key";
     static Base64 base64Url = new Base64(true);
     static Gson gson = new GsonBuilder().create();
 
