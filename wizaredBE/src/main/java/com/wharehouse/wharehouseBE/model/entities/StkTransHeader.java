@@ -32,10 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import org.hibernate.annotations.Cascade;
 
-/**
- *
- * @author Rawan.Ahmed
- */
+
 @Entity
 @Table(name = "STK_TRANS_HEADER")
 @XmlRootElement

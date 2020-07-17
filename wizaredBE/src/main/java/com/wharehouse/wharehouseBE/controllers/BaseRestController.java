@@ -315,7 +315,7 @@ public class BaseRestController<T extends Serializable> {
     public @ResponseBody
     ResponseEntity findById(
             @RequestHeader(value = HttpHeaders.AUTHORIZATION) String headerAuthorization,
-            @PathVariable Long id) throws Exception {
+            @PathVariable String id) throws Exception {
         try {
             validateCrudOperation(CrudOpTypesEnum.FIND.getCrudTypeId());
             T entity = findOne(id, null);
@@ -390,7 +390,7 @@ public class BaseRestController<T extends Serializable> {
     }
 //https://stackoverflow.com/questions/24482117/when-use-getone-and-findone-methods-spring-data-jpa
 
-    protected T findOne(Long id, String code) {
+    protected T findOne(String id, String code) {
         T entity = null;
         Serializable identifer = id != null ? id : code;
         Optional<T> optional = this.genericJpARepository.findById(identifer);
@@ -403,7 +403,7 @@ public class BaseRestController<T extends Serializable> {
     @RequestMapping(value = "edit/{id}", method = RequestMethod.PUT, consumes = {MediaType.APPLICATION_JSON_VALUE})
     public @ResponseBody
     ResponseEntity update(@RequestHeader(value = HttpHeaders.AUTHORIZATION) String headerAuthorization,
-            @PathVariable Long id, @RequestBody T json) throws Exception {
+            @PathVariable String id, @RequestBody T json) throws Exception {
         validateCrudOperation(CrudOpTypesEnum.EDIT.getCrudTypeId());
         logger.debug("update() of id#{} with body {}", id, json);
         logger.debug("T json is of type {}", json.getClass());
@@ -411,7 +411,7 @@ public class BaseRestController<T extends Serializable> {
 
     }
 
-    protected T updateEntity(Long id, T json) {
+    protected T updateEntity(String id, T json) {
         T entity = findOne(id, null);
         T updated = null;
         if (entity != null) {
@@ -433,7 +433,7 @@ public class BaseRestController<T extends Serializable> {
         }
     }
 
-    protected ResponseEntity updateEntity(Long id, T json, String headerAuthorization) {
+    protected ResponseEntity updateEntity(String id, T json, String headerAuthorization) {
         try {
             T updated = updateEntity(id, json);
             if (updated != null) {

@@ -8,6 +8,7 @@ package com.wharehouse.wharehouseBE.security.filters;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wharehouse.wharehouseBE.model.ConstantStrings;
 import com.wharehouse.wharehouseBE.security.model.entities.Users;
+import com.wharehouse.wharehouseBE.security.utils.JWTUtil;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
@@ -41,8 +42,8 @@ public class JWTAuthenticationMobileFilter extends UsernamePasswordAuthenticatio
             String requestJWTBody = null;
             requestJWTBody = IOUtils.toString(req.getReader());
             //hint remove decode for test
-            //String requestBody = JWTUtil.decodeJWT(requestJWTBody, JWTUtil.DEFAULT_KEY.getBytes());
-            Users user = new ObjectMapper().readValue(requestJWTBody, Users.class);
+            String requestBody = JWTUtil.decodeJWT(requestJWTBody, JWTUtil.DEFAULT_KEY.getBytes());
+            Users user = new ObjectMapper().readValue(requestBody, Users.class);
             return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUserName().trim(),
                     user.getPassword(), new ArrayList<>()));
         } catch (IOException e) {

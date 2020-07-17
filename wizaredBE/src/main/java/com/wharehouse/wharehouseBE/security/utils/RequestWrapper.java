@@ -61,7 +61,8 @@ public class RequestWrapper extends HttpServletRequestWrapper {
         //Store request pody content in 'body' variable
         String signKey = Base64.getEncoder().encodeToString(jwtToken.getBytes("UTF-8"));
         if (!stringBuilder.toString().isEmpty()) {
-            body =stringBuilder.toString(); //JWTUtil.decodeJWT(stringBuilder.toString(), signKey.getBytes("UTF-8"));
+            //body =stringBuilder.toString(); //JWTUtil.decodeJWT(stringBuilder.toString(), signKey.getBytes("UTF-8"));
+            body =JWTUtil.decodeJWT(stringBuilder.toString(), signKey.getBytes("UTF-8"));
         } else {
             body = "";
 

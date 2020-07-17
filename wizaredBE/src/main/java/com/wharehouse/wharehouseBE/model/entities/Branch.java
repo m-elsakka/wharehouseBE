@@ -27,10 +27,7 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author Rawan.Ahmed
- */
+
 @Entity
 @Table(name = "BRANCH")
 @XmlRootElement
@@ -78,7 +75,7 @@ public class Branch extends BaseEntity implements Serializable {
     @JsonIgnore
     private String mfgCode;
     @Basic(optional = false)
-    @NotNull
+   // @NotNull
     @Size(min = 1, max = 1)
     @Column(name = "REP")
     @JsonIgnore
