@@ -6,20 +6,12 @@
 package com.wharehouse.wharehouseBE.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -68,14 +60,14 @@ public class Item extends BaseEntity implements Serializable {
     //@JsonIgnore
     private BigDecimal crtZ;
     @Column(name = "NETWEIGHT")
-    @JsonIgnore
+//    @JsonIgnore
     private BigDecimal netweight;
     @Column(name = "TOTALWEIGHT")
-    //@JsonIgnore
+    @JsonIgnore
     private BigDecimal totalweight;
     @Size(max = 2)
     @Column(name = "ITEMTYPE")
-   // @JsonIgnore
+    // @JsonIgnore
     private String itemtype;
     @Size(max = 5)
     @Column(name = "SKU_TYPENO")
@@ -116,6 +108,7 @@ public class Item extends BaseEntity implements Serializable {
 //    @Size(max = 100)
 //    @Column(name = "PLT_BARCODE")
 //    private String pltBarcode;
+
     /*@JoinColumn(name = "BRANDNO", referencedColumnName = "BRANDNO")
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
@@ -294,7 +287,6 @@ public class Item extends BaseEntity implements Serializable {
 //    public void setIsUnileverItem(Character isUnileverItem) {
 //        this.isUnileverItem = isUnileverItem;
 //    }
-
     public String getIsSellable() {
         return isSellable;
     }
@@ -327,7 +319,7 @@ public class Item extends BaseEntity implements Serializable {
         this.brandno = brandno;
     }*/
 
-    /*public Packsize getPacksizeno() {
+ /*public Packsize getPacksizeno() {
         return packsizeno;
     }
 
@@ -342,7 +334,6 @@ public class Item extends BaseEntity implements Serializable {
     public void setPacksize(Packsize packsize) {
         this.packsize = packsize;
     }*/
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -367,5 +358,5 @@ public class Item extends BaseEntity implements Serializable {
     public String toString() {
         return "com.unilever.StockKeeper.model.entities.Item[ itemno=" + itemno + " ]";
     }
-    
+
 }
