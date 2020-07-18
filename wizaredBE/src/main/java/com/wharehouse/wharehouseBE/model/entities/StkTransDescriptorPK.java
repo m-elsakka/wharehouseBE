@@ -79,7 +79,7 @@ public class StkTransDescriptorPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.unilever.StockKeeperSAS.model.entities.StkTransDescriptorPK[ transDescCode=" + transDescCode + ", branchno=" + branchno + " ]";
+        return "com.wharehouse.wharehouseBE.model.entities.StkTransDescriptorPK[ transDescCode=" + transDescCode + ", branchno=" + branchno + " ]";
     }
     
 }

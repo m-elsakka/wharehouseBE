@@ -20,12 +20,13 @@ public class CustomUser extends User {
     private final String firstName;
     private final String lastName;
     private final short isAdmin;
+    private final String branchNo;
 
     public CustomUser(String username, String password, boolean enabled,
             boolean accountNonExpired, boolean credentialsNonExpired,
             boolean accountNonLocked,
             Collection authorities, Long id,
-            String firstName, String lastName, short isAdmin) {
+            String firstName, String lastName, String branchNo ,short isAdmin) {
 
         super(username, password, enabled, accountNonExpired,
                 credentialsNonExpired, accountNonLocked, authorities);
@@ -33,6 +34,7 @@ public class CustomUser extends User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.id = id;
+        this.branchNo=branchNo;
         this.isAdmin = isAdmin;
 
     }
@@ -56,5 +58,11 @@ public class CustomUser extends User {
     public short getIsAdmin() {
         return isAdmin;
     }
+
+    public String getBranchNo() {
+        return branchNo;
+    }
+    
+    
 
 }

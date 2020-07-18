@@ -42,7 +42,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
 //                }
                   return new CustomUser(username,
                         user.getPassword(), true, true, true, true, mapToGrantedAuthorities(user.getAuthorities()),
-                        user.getId(), user.getFirstName(), user.getLastName(), user.getIsAdmin());
+                        user.getId(), user.getFirstName(), user.getLastName(),user.getBranchNo(), user.getIsAdmin());
             } else {
                 throw new UsernameNotFoundException(username);
             }

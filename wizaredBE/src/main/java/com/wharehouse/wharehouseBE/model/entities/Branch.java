@@ -501,7 +501,7 @@ public class Branch extends BaseEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "com.unilever.StockKeeperSAS.model.entities.Branch[ branchno=" + branchno + " ]";
+        return "com.wharehouse.wharehouseBE.model.entities.Branch[ branchno=" + branchno + " ]";
     }
     
 }

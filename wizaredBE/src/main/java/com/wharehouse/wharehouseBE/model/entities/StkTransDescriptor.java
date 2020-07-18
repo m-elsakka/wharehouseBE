@@ -248,7 +248,7 @@ public class StkTransDescriptor extends BaseEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "com.unilever.StockKeeperSAS.model.entities.StkTransDescriptor[ stkTransDescriptorPK=" + stkTransDescriptorPK + " ]";
+        return "com.wharehouse.wharehouseBE.model.entities.StkTransDescriptor[ stkTransDescriptorPK=" + stkTransDescriptorPK + " ]";
     }
     
 }

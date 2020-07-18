@@ -211,7 +211,7 @@ public class StkAccounts extends BaseEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "com.unilever.StockKeeperSAS.model.entities.StkAccounts[ accountCode=" + accountCode + " ]";
+        return "com.wharehouse.wharehouseBE.model.entities.StkAccounts[ accountCode=" + accountCode + " ]";
     }
     
 }

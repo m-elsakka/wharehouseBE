@@ -7,6 +7,7 @@ public class UserLoginResponse {
 
     private String token;
     private String fullName;
+    private String branchno;
     private Long id;
     private List<Authority> authorities;
 
@@ -44,4 +45,14 @@ public class UserLoginResponse {
     public void setAuthorities(List<Authority> authorities) {
         this.authorities = authorities;
     }
+
+    public String getBranchno() {
+        return branchno;
+    }
+
+    public void setBranchno(String branchno) {
+        this.branchno = branchno;
+    }
+    
+    
 }

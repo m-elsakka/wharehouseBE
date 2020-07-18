@@ -365,7 +365,7 @@ public class Item extends BaseEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "com.unilever.StockKeeper.model.entities.Item[ itemno=" + itemno + " ]";
+        return "com.wharehouse.wharehouseBE.model.entities.Item[ itemno=" + itemno + " ]";
     }
     
 }

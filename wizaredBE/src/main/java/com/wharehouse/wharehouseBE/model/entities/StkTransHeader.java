@@ -86,11 +86,11 @@ public class StkTransHeader extends BaseEntity implements Serializable {
     @Transient
     private String transactionTypeName;
     
-    @Transient
-    private String insideStore;
-   
-    @Transient 
-    private String storeName;
+//    @Transient
+//    private String insideStore;
+//   
+//    @Transient 
+//    private String storeName;
 
     public StkTransHeader() {
     }
@@ -216,42 +216,42 @@ public class StkTransHeader extends BaseEntity implements Serializable {
         this.transactionTypeName = transactionTypeName;
     }
 
-    public String getInsideStore() {
-        if((accountC != null && (accountC.getAccountCode().startsWith("10") || accountC.getAccountCode().startsWith("60")))
-            && (accountD != null && !(accountD.getAccountCode().startsWith("10") || accountD.getAccountCode().startsWith("60")))){
-            this.insideStore = "N";
-            this.storeName = accountC.getAccountNamea();
-        }else if((accountD != null && (accountD.getAccountCode().startsWith("10") || accountD.getAccountCode().startsWith("60")))
-        && (accountC != null && !(accountC.getAccountCode().startsWith("10") || accountC.getAccountCode().startsWith("60")))){
-            this.insideStore = "Y";
-            this.storeName = accountD.getAccountNamea();
-        }else if((accountD != null && (accountD.getAccountCode().startsWith("10") || accountD.getAccountCode().startsWith("60")))
-            && (accountC != null && !(accountC.getAccountCode().startsWith("10") || accountC.getAccountCode().startsWith("60")))){
-            if(accountC.getAccountCode().startsWith("10")){
-                this.insideStore = "N";
-                this.storeName = accountC.getAccountNamea();
-            }else if(accountD.getAccountCode().startsWith("10")){
-                this.insideStore = "Y";
-                this.storeName = accountD.getAccountNamea();
-            }
-        }else if(accountC == null && (accountD != null && (accountD.getAccountCode().startsWith("10") || accountD.getAccountCode().startsWith("60")))){
-            this.insideStore = "Y";
-            this.storeName = accountD.getAccountNamea();
-        }
-        return insideStore;
-    }
+//    public String getInsideStore() {
+//        if((accountC != null && (accountC.getAccountCode().startsWith("10") || accountC.getAccountCode().startsWith("60")))
+//            && (accountD != null && !(accountD.getAccountCode().startsWith("10") || accountD.getAccountCode().startsWith("60")))){
+//            this.insideStore = "N";
+//            this.storeName = accountC.getAccountNamea();
+//        }else if((accountD != null && (accountD.getAccountCode().startsWith("10") || accountD.getAccountCode().startsWith("60")))
+//        && (accountC != null && !(accountC.getAccountCode().startsWith("10") || accountC.getAccountCode().startsWith("60")))){
+//            this.insideStore = "Y";
+//            this.storeName = accountD.getAccountNamea();
+//        }else if((accountD != null && (accountD.getAccountCode().startsWith("10") || accountD.getAccountCode().startsWith("60")))
+//            && (accountC != null && !(accountC.getAccountCode().startsWith("10") || accountC.getAccountCode().startsWith("60")))){
+//            if(accountC.getAccountCode().startsWith("10")){
+//                this.insideStore = "N";
+//                this.storeName = accountC.getAccountNamea();
+//            }else if(accountD.getAccountCode().startsWith("10")){
+//                this.insideStore = "Y";
+//                this.storeName = accountD.getAccountNamea();
+//            }
+//        }else if(accountC == null && (accountD != null && (accountD.getAccountCode().startsWith("10") || accountD.getAccountCode().startsWith("60")))){
+//            this.insideStore = "Y";
+//            this.storeName = accountD.getAccountNamea();
+//        }
+//        return insideStore;
+//    }
+//
+//    public void setInsideStore(String insideStore) {
+//        this.insideStore = insideStore;
+//    }
 
-    public void setInsideStore(String insideStore) {
-        this.insideStore = insideStore;
-    }
-
-    public String getStoreName() {
-        return storeName;
-    }
-
-    public void setStoreName(String storeName) {
-        this.storeName = storeName;
-    }
+//    public String getStoreName() {
+//        return storeName;
+//    }
+//
+//    public void setStoreName(String storeName) {
+//        this.storeName = storeName;
+//    }
     
     @Override
     public int hashCode() {
@@ -275,7 +275,7 @@ public class StkTransHeader extends BaseEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "com.unilever.StockKeeperSAS.model.entities.StkTransHeader[ transNo=" + transNo + " ]";
+        return "com.wharehouse.wharehouseBE.model.entities.StkTransHeader[ transNo=" + transNo + " ]";
     }
 
 }

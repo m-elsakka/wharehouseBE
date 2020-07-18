@@ -104,7 +104,7 @@ public class StkTransDetailsPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.unilever.StockKeeperSAS.model.entities.StkTransDetailsPK[ productiondate=" + productiondate + ", itemno=" + itemno + ", transNo=" + transNo + " ]";
+        return "com.wharehouse.wharehouseBE.model.entities.StkTransDetailsPK[ productiondate=" + productiondate + ", itemno=" + itemno + ", transNo=" + transNo + " ]";
     }
     
 }

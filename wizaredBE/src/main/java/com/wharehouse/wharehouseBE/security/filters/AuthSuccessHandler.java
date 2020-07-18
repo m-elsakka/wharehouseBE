@@ -93,6 +93,7 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
             userLoginResponse.setToken(jwtToken);
             userLoginResponse.setFullName(fullName);
             userLoginResponse.setId(customUser.getId());
+            userLoginResponse.setBranchno(customUser.getBranchNo());
             List authorities = new ArrayList(customUser.getAuthorities());
             userLoginResponse.setAuthorities(authorities);
             responsePojo.setSuccess(true);

@@ -89,8 +89,8 @@ public class Users extends CrudBaseEntity implements Serializable {
 //    private List<Users> subordinatList;
 //
 //
-//    @Column(name = "branchno")
-//    private String branchNo;
+    @Column(name = "branchno")
+    private String branchNo;
 //
 //    @Column(name = "is_s2_account")
 //    private short isS2Account;
@@ -202,13 +202,13 @@ public class Users extends CrudBaseEntity implements Serializable {
 //    }
 //
 //
-//    public String getBranchNo() {
-//        return branchNo;
-//    }
-//
-//    public void setBranchNo(String branchNo) {
-//        this.branchNo = branchNo;
-//    }
+    public String getBranchNo() {
+        return branchNo;
+    }
+
+    public void setBranchNo(String branchNo) {
+        this.branchNo = branchNo;
+    }
     public static Integer findLineManagerLevel(int level) {
         Integer lineManagerLevel = null;
         if (level == UserLevelEnum.TEAM_LEAD.getLevelNumber()) {
