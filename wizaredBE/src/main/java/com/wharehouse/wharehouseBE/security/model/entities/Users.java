@@ -8,6 +8,7 @@ package com.wharehouse.wharehouseBE.security.model.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.wharehouse.wharehouseBE.model.entities.CrudBaseEntity;
+import com.wharehouse.wharehouseBE.model.entities.StkAccounts;
 import com.wharehouse.wharehouseBE.security.enums.UserLevelEnum;
 import java.io.Serializable;
 import java.util.List;
@@ -69,6 +70,7 @@ public class Users extends CrudBaseEntity implements Serializable {
 //    @Column(name = "line_manager")
 //    private Long lineManagerId;
 
+    //@LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(fetch = FetchType.EAGER)
     //@JsonIgnore
     @JoinTable(
@@ -78,6 +80,17 @@ public class Users extends CrudBaseEntity implements Serializable {
             inverseJoinColumns = {
                 @JoinColumn(name = "AUTHORITY_ID", referencedColumnName = "ID")})
     private List<Authority> authorities;
+
+    // @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany(fetch = FetchType.LAZY)
+    //@JsonIgnore
+    @JoinTable(
+            name = "user_account",
+            joinColumns = {
+                @JoinColumn(name = "user_id", referencedColumnName = "ID")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "account_id", referencedColumnName = "ACCOUNT_CODE")})
+    private List<StkAccounts> stkAccountsList;
 
 //    @JsonIgnore
 //    @JoinColumn(name = "line_manager", referencedColumnName = "id", insertable = false, updatable = false)
@@ -91,6 +104,7 @@ public class Users extends CrudBaseEntity implements Serializable {
 //
     @Column(name = "branchno")
     private String branchNo;
+
 //
 //    @Column(name = "is_s2_account")
 //    private short isS2Account;
@@ -128,6 +142,14 @@ public class Users extends CrudBaseEntity implements Serializable {
 
     public void setChangePassword(boolean changePassword) {
         this.changePassword = changePassword;
+    }
+
+    public List<StkAccounts> getStkAccountsList() {
+        return stkAccountsList;
+    }
+
+    public void setStkAccountsList(List<StkAccounts> stkAccountsList) {
+        this.stkAccountsList = stkAccountsList;
     }
 
     public Users(Long id, String userName, String password) {
@@ -209,6 +231,7 @@ public class Users extends CrudBaseEntity implements Serializable {
     public void setBranchNo(String branchNo) {
         this.branchNo = branchNo;
     }
+
     public static Integer findLineManagerLevel(int level) {
         Integer lineManagerLevel = null;
         if (level == UserLevelEnum.TEAM_LEAD.getLevelNumber()) {
@@ -245,6 +268,16 @@ public class Users extends CrudBaseEntity implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    
 
 //    public short getActive() {
 //        return active;

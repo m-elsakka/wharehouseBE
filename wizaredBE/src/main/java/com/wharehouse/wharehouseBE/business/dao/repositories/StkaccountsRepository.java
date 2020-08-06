@@ -6,18 +6,12 @@
 package com.wharehouse.wharehouseBE.business.dao.repositories;
 
 import com.wharehouse.wharehouseBE.business.dao.common.GenericJPARepository;
-import com.wharehouse.wharehouseBE.model.entities.StkTransHeader;
-import java.util.List;
-
-
+import com.wharehouse.wharehouseBE.model.entities.StkAccounts;
 
 /**
  *
- * @author Rawan.Ahmed
+ * @author Ahmed.Gaber
  */
-public interface StkTransHeaderRepository extends GenericJPARepository<StkTransHeader> {
+public interface StkaccountsRepository extends GenericJPARepository<StkAccounts>{
     
-    
-      List<StkTransHeader> findByAccountType(String accountType);
-
 }

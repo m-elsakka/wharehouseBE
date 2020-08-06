@@ -46,7 +46,7 @@ public class StockTransactionSpecifications extends GenericEntitySpecfications<S
                 predicates.add(cb.equal(root.get(StkTransHeader_.transNo), transNo));
             }
             if (accountCode != null && !accountCode.isEmpty()) {
-                predicates.add(cb.equal(root.get(StkTransHeader_.accountC).get(StkAccounts_.accountCode), accountCode));
+                predicates.add(cb.equal(root.get(StkTransHeader_.accountC).get(StkAccounts_.CABINETNO), accountCode));
             }
   
             return cb.and(predicates.toArray(new Predicate[predicates.size()]));

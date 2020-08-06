@@ -6,20 +6,12 @@
 package com.wharehouse.wharehouseBE.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -43,13 +35,13 @@ public class StkAccounts extends BaseEntity implements Serializable {
     @NotNull
     @Size(min = 1, max = 15)
     @Column(name = "ACCOUNT_CODE")
-    private String accountCode;
+    private String cabinetno;
     @Size(max = 50)
     @Column(name = "ACCOUNT_NAMEA")
-    private String accountNamea;
+    private String cabinetnamea;
     @Size(max = 50)
     @Column(name = "ACCOUNT_NAMEE")
-    private String accountNamee;
+    private String cabinetnamee;
     @Size(max = 20)
     @Column(name = "ACCOUNT_REF")
     @JsonIgnore
@@ -68,6 +60,10 @@ public class StkAccounts extends BaseEntity implements Serializable {
     @Column(name = "KEEP_HISTORY")
     @JsonIgnore
     private Character keepHistory;
+    
+    @Size(max = 1)
+    @Column(name = "ACTIVE")
+    private String active;
     /*@OneToMany(mappedBy = "accountC",fetch = FetchType.LAZY)
     @JsonIgnore
     private List<StkTransDescriptor> stkTransDescriptorList;
@@ -86,33 +82,33 @@ public class StkAccounts extends BaseEntity implements Serializable {
     public StkAccounts() {
     }
 
-    public StkAccounts(String accountCode) {
-        this.accountCode = accountCode;
+    public String getCabinetno() {
+        return cabinetno;
     }
 
-    public String getAccountCode() {
-        return accountCode;
+    public void setCabinetno(String cabinetno) {
+        this.cabinetno = cabinetno;
     }
 
-    public void setAccountCode(String accountCode) {
-        this.accountCode = accountCode;
+    public String getCabinetnamea() {
+        return cabinetnamea;
     }
 
-    public String getAccountNamea() {
-        return accountNamea;
+    public void setCabinetnamea(String cabinetnamea) {
+        this.cabinetnamea = cabinetnamea;
     }
 
-    public void setAccountNamea(String accountNamea) {
-        this.accountNamea = accountNamea;
+    public String getCabinetnamee() {
+        return cabinetnamee;
     }
 
-    public String getAccountNamee() {
-        return accountNamee;
+    public void setCabinetnamee(String cabinetnamee) {
+        this.cabinetnamee = cabinetnamee;
     }
 
-    public void setAccountNamee(String accountNamee) {
-        this.accountNamee = accountNamee;
-    }
+   
+
+   
 
     public String getAccountRef() {
         return accountRef;
@@ -154,6 +150,16 @@ public class StkAccounts extends BaseEntity implements Serializable {
         this.keepHistory = keepHistory;
     }
 
+    public String getActive() {
+        return active;
+    }
+
+    public void setActive(String active) {
+        this.active = active;
+    }
+    
+    
+    
     /*
     @XmlTransient
     public List<StkTransDescriptor> getStkTransDescriptorList() {
@@ -192,7 +198,7 @@ public class StkAccounts extends BaseEntity implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (accountCode != null ? accountCode.hashCode() : 0);
+        hash += (cabinetno != null ? cabinetno.hashCode() : 0);
         return hash;
     }
 
@@ -203,7 +209,7 @@ public class StkAccounts extends BaseEntity implements Serializable {
             return false;
         }
         StkAccounts other = (StkAccounts) object;
-        if ((this.accountCode == null && other.accountCode != null) || (this.accountCode != null && !this.accountCode.equals(other.accountCode))) {
+        if ((this.cabinetno == null && other.cabinetno != null) || (this.cabinetno != null && !this.cabinetno.equals(other.cabinetno))) {
             return false;
         }
         return true;
@@ -211,7 +217,7 @@ public class StkAccounts extends BaseEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "com.wharehouse.wharehouseBE.model.entities.StkAccounts[ accountCode=" + accountCode + " ]";
+        return "com.wharehouse.wharehouseBE.model.entities.StkAccounts[ cabinetno=" + cabinetno + " ]";
     }
     
 }

@@ -32,7 +32,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import org.hibernate.annotations.Cascade;
 
-
 @Entity
 @Table(name = "STK_TRANS_HEADER")
 @XmlRootElement
@@ -60,6 +59,11 @@ public class StkTransHeader extends BaseEntity implements Serializable {
     @Size(max = 2)
     @Column(name = "STATUS")
     private String status;
+
+    @Size(max = 3)
+    @Column(name = "account_type")
+    private String accountType;
+
     @JoinColumn(name = "ACCOUNT_C", referencedColumnName = "ACCOUNT_CODE", insertable = true, updatable = true)
     @ManyToOne(fetch = FetchType.LAZY)
     private StkAccounts accountC;
@@ -77,21 +81,20 @@ public class StkTransHeader extends BaseEntity implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Branch branchno;
     @JoinColumns({
-    @JoinColumn(name = "TRANS_DESC_CODE", referencedColumnName = "TRANS_DESC_CODE", insertable = false, updatable = false)
+        @JoinColumn(name = "TRANS_DESC_CODE", referencedColumnName = "TRANS_DESC_CODE", insertable = false, updatable = false)
         , @JoinColumn(name = "BRANCHNO", referencedColumnName = "BRANCHNO", insertable = false, updatable = false)})
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JsonIgnore
     private StkTransDescriptor stkTransDescriptor;
-    
+
     @Transient
     private String transactionTypeName;
-    
+
 //    @Transient
 //    private String insideStore;
 //   
 //    @Transient 
 //    private String storeName;
-
     public StkTransHeader() {
     }
 
@@ -147,7 +150,6 @@ public class StkTransHeader extends BaseEntity implements Serializable {
         this.accountC = accountC;
     }
 
-    
     public StkAccounts getAccountD() {
         return accountD;
     }
@@ -159,9 +161,6 @@ public class StkTransHeader extends BaseEntity implements Serializable {
 //    public void setStkTransLossList(List<StkTransLoss> stkTransLossList) {
 //        this.stkTransLossList = stkTransLossList;
 //    }
-    
-    
-
     public void setAccountD(StkAccounts accountD) {
         this.accountD = accountD;
     }
@@ -183,6 +182,17 @@ public class StkTransHeader extends BaseEntity implements Serializable {
         this.branchno = branchno;
     }
 
+    public String getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
+    }
+
+ 
+    
+    
     /*public Cars getCarId() {
         return carId;
     }
@@ -198,7 +208,6 @@ public class StkTransHeader extends BaseEntity implements Serializable {
     public void setDriverId(Drivers driverId) {
         this.driverId = driverId;
     }*/
-
     public StkTransDescriptor getStkTransDescriptor() {
         return stkTransDescriptor;
     }
@@ -244,7 +253,6 @@ public class StkTransHeader extends BaseEntity implements Serializable {
 //    public void setInsideStore(String insideStore) {
 //        this.insideStore = insideStore;
 //    }
-
 //    public String getStoreName() {
 //        return storeName;
 //    }
@@ -252,7 +260,6 @@ public class StkTransHeader extends BaseEntity implements Serializable {
 //    public void setStoreName(String storeName) {
 //        this.storeName = storeName;
 //    }
-    
     @Override
     public int hashCode() {
         int hash = 0;

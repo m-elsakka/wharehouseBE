@@ -5,7 +5,7 @@
  */
 package com.wharehouse.wharehouseBE.controllers;
 
-import com.wharehouse.wharehouseBE.model.entities.Branch;
+import com.wharehouse.wharehouseBE.model.entities.Suppliers;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,14 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author Ahmed.Gaber
  */
-
 @RestController
-@RequestMapping("masterdata/branchs")
-public class BranchController extends BaseRestController<Branch>{
-
-    public BranchController() {
-    }
-    
-    
+@RequestMapping("masterdata/suppliers")
+public class SuppliersController extends BaseRestController<Suppliers>{
     
 }

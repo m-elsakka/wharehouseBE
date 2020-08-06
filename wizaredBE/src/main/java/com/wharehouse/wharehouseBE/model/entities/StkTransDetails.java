@@ -30,6 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class StkTransDetails extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @JsonIgnore
     @EmbeddedId
     protected StkTransDetailsPK stkTransDetailsPK;
     @Column(name = "Q_CRT")
@@ -50,9 +51,9 @@ public class StkTransDetails extends BaseEntity implements Serializable {
 //    @Column(name = "ACC_Q_PLT")
     //@JsonIgnore
 //    private BigDecimal accQPlt;
-    @Size(max = 300)
-    @Column(name = "STORE_KEPPER_COMMENTS")
-    private String storeKepperComments;
+//    @Size(max = 300)
+//    @Column(name = "STORE_KEPPER_COMMENTS")
+//    private String storeKepperComments;
     @JoinColumn(name = "TRANS_NO", referencedColumnName = "TRANS_NO", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JsonIgnore
@@ -133,13 +134,13 @@ public class StkTransDetails extends BaseEntity implements Serializable {
 //        this.accQPlt = accQPlt;
 //    }
 
-    public String getStoreKepperComments() {
-        return storeKepperComments;
-    }
-
-    public void setStoreKepperComments(String storeKepperComments) {
-        this.storeKepperComments = storeKepperComments;
-    }
+//    public String getStoreKepperComments() {
+//        return storeKepperComments;
+//    }
+//
+//    public void setStoreKepperComments(String storeKepperComments) {
+//        this.storeKepperComments = storeKepperComments;
+//    }
 
     public StkTransHeader getStkTransHeader() {
         return stkTransHeader;
