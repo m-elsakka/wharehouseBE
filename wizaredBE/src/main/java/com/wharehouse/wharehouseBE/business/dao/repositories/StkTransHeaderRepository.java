@@ -18,6 +18,6 @@ import java.util.List;
 public interface StkTransHeaderRepository extends GenericJPARepository<StkTransHeader> {
     
     
-      List<StkTransHeader> findByAccountType(String accountType);
+      //List<StkTransHeader> findByAccountType(String accountType);
 
 }

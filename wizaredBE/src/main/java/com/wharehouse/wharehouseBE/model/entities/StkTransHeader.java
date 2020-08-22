@@ -11,6 +11,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.wharehouse.wharehouseBE.utils.serializer.JsonDateTimeDeserializer;
 import com.wharehouse.wharehouseBE.utils.serializer.JsonDateTimeSerializer;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -60,16 +62,15 @@ public class StkTransHeader extends BaseEntity implements Serializable {
     @Column(name = "STATUS")
     private String status;
 
-    @Size(max = 3)
-    @Column(name = "account_type")
-    private String accountType;
-
-    @JoinColumn(name = "ACCOUNT_C", referencedColumnName = "ACCOUNT_CODE", insertable = true, updatable = true)
+//    @Size(max = 3)
+//    @Column(name = "account_type")
+//    private String accountType;
+    @JoinColumn(name = "ACCOUNT_C", referencedColumnName = "cabinet_code", insertable = true, updatable = true)
     @ManyToOne(fetch = FetchType.LAZY)
-    private StkAccounts accountC;
-    @JoinColumn(name = "ACCOUNT_D", referencedColumnName = "ACCOUNT_CODE", insertable = true, updatable = true)
+    private StkCabinet accountC;
+    @JoinColumn(name = "ACCOUNT_D", referencedColumnName = "cabinet_code", insertable = true, updatable = true)
     @ManyToOne(fetch = FetchType.LAZY)
-    private StkAccounts accountD;
+    private StkCabinet accountD;
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @OneToMany(orphanRemoval = true, mappedBy = "stkTransHeader", fetch = FetchType.LAZY)
     private List<StkTransDetails> stkTransDetailsList;
@@ -80,21 +81,10 @@ public class StkTransHeader extends BaseEntity implements Serializable {
     @JoinColumn(name = "BRANCHNO", referencedColumnName = "BRANCHNO")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Branch branchno;
-    @JoinColumns({
-        @JoinColumn(name = "TRANS_DESC_CODE", referencedColumnName = "TRANS_DESC_CODE", insertable = false, updatable = false)
-        , @JoinColumn(name = "BRANCHNO", referencedColumnName = "BRANCHNO", insertable = false, updatable = false)})
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JsonIgnore
-    private StkTransDescriptor stkTransDescriptor;
 
     @Transient
-    private String transactionTypeName;
+    private List<Category> categoryList;
 
-//    @Transient
-//    private String insideStore;
-//   
-//    @Transient 
-//    private String storeName;
     public StkTransHeader() {
     }
 
@@ -142,27 +132,53 @@ public class StkTransHeader extends BaseEntity implements Serializable {
         this.status = status;
     }
 
-    public StkAccounts getAccountC() {
+    public StkCabinet getAccountC() {
         return accountC;
     }
 
-    public void setAccountC(StkAccounts accountC) {
+    public void setAccountC(StkCabinet accountC) {
         this.accountC = accountC;
     }
 
-    public StkAccounts getAccountD() {
+    public StkCabinet getAccountD() {
         return accountD;
     }
 
-//    public List<StkTransLoss> getStkTransLossList() {
-//        return stkTransLossList;
-//    }
-//
-//    public void setStkTransLossList(List<StkTransLoss> stkTransLossList) {
-//        this.stkTransLossList = stkTransLossList;
-//    }
-    public void setAccountD(StkAccounts accountD) {
+    public void setAccountD(StkCabinet accountD) {
         this.accountD = accountD;
+    }
+
+    public List<Category> getCategoryList() {
+        List<Category> categoryList = new ArrayList<>();
+        if (stkTransDetailsList != null && !stkTransDetailsList.isEmpty()) {
+            for (int i = 0; i < stkTransDetailsList.size(); i++) {
+                String catno = stkTransDetailsList.get(i).getItemno().getCategoryno();
+                Integer qrt = stkTransDetailsList.get(i).getQCrt();
+                Double weight = stkTransDetailsList.get(i).getWeight();
+                Category catObj = new Category();
+
+                for (int j = i +1; j < stkTransDetailsList.size(); j++) {
+                    if (catno != null && !catno.isEmpty() && catno.equals(stkTransDetailsList.get(j).getItemno().getCategoryno())) {
+                        catObj.setCategoryCode(catno);
+                        catObj.setCategoryNamea(stkTransDetailsList.get(i).getItemno().getCategory().getCategoryNamea());
+                        catObj.setCategoryNamee(stkTransDetailsList.get(i).getItemno().getCategory().getCategoryNamee());
+                        qrt += stkTransDetailsList.get(j).getQCrt();
+                        weight += stkTransDetailsList.get(j).getWeight();
+                    }
+                }
+                if (catObj.getCategoryCode() != null && !catObj.getCategoryCode().isEmpty()) {
+                    catObj.setCtrSum(qrt);
+                    catObj.setWeigthSum(weight);
+                    categoryList.add(catObj);
+                }
+            }
+        }
+
+        return categoryList;
+    }
+
+    public void setCategoryList(List<Category> categoryList) {
+        this.categoryList = categoryList;
     }
 
     @XmlTransient
@@ -182,83 +198,12 @@ public class StkTransHeader extends BaseEntity implements Serializable {
         this.branchno = branchno;
     }
 
-    public String getAccountType() {
-        return accountType;
-    }
-
-    public void setAccountType(String accountType) {
-        this.accountType = accountType;
-    }
-
- 
-    
-    
-    /*public Cars getCarId() {
-        return carId;
-    }
-
-    public void setCarId(Cars carId) {
-        this.carId = carId;
-    }
-
-    public Drivers getDriverId() {
-        return driverId;
-    }
-
-    public void setDriverId(Drivers driverId) {
-        this.driverId = driverId;
-    }*/
-    public StkTransDescriptor getStkTransDescriptor() {
-        return stkTransDescriptor;
-    }
-
-    public void setStkTransDescriptor(StkTransDescriptor stkTransDescriptor) {
-        this.stkTransDescriptor = stkTransDescriptor;
-    }
-
-    public String getTransactionTypeName() {
-        transactionTypeName = stkTransDescriptor.getTransDescNamea();
-        return transactionTypeName;
-    }
-
-    public void setTransactionTypeName(String transactionTypeName) {
-        this.transactionTypeName = transactionTypeName;
-    }
-
-//    public String getInsideStore() {
-//        if((accountC != null && (accountC.getAccountCode().startsWith("10") || accountC.getAccountCode().startsWith("60")))
-//            && (accountD != null && !(accountD.getAccountCode().startsWith("10") || accountD.getAccountCode().startsWith("60")))){
-//            this.insideStore = "N";
-//            this.storeName = accountC.getAccountNamea();
-//        }else if((accountD != null && (accountD.getAccountCode().startsWith("10") || accountD.getAccountCode().startsWith("60")))
-//        && (accountC != null && !(accountC.getAccountCode().startsWith("10") || accountC.getAccountCode().startsWith("60")))){
-//            this.insideStore = "Y";
-//            this.storeName = accountD.getAccountNamea();
-//        }else if((accountD != null && (accountD.getAccountCode().startsWith("10") || accountD.getAccountCode().startsWith("60")))
-//            && (accountC != null && !(accountC.getAccountCode().startsWith("10") || accountC.getAccountCode().startsWith("60")))){
-//            if(accountC.getAccountCode().startsWith("10")){
-//                this.insideStore = "N";
-//                this.storeName = accountC.getAccountNamea();
-//            }else if(accountD.getAccountCode().startsWith("10")){
-//                this.insideStore = "Y";
-//                this.storeName = accountD.getAccountNamea();
-//            }
-//        }else if(accountC == null && (accountD != null && (accountD.getAccountCode().startsWith("10") || accountD.getAccountCode().startsWith("60")))){
-//            this.insideStore = "Y";
-//            this.storeName = accountD.getAccountNamea();
-//        }
-//        return insideStore;
+//    public String getAccountType() {
+//        return accountType;
 //    }
 //
-//    public void setInsideStore(String insideStore) {
-//        this.insideStore = insideStore;
-//    }
-//    public String getStoreName() {
-//        return storeName;
-//    }
-//
-//    public void setStoreName(String storeName) {
-//        this.storeName = storeName;
+//    public void setAccountType(String accountType) {
+//        this.accountType = accountType;
 //    }
     @Override
     public int hashCode() {

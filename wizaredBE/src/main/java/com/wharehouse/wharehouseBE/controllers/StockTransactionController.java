@@ -67,7 +67,8 @@ public class StockTransactionController extends BaseRestController<StkTransHeade
         String transDate = null;
         Long transNo = null;
         Branch branch = null;
-        String accountCode = null;
+        String cabinetno = null;
+        Integer stkTransType = null;
         if (searchPar.getFiltersList() != null && !searchPar.getFiltersList().isEmpty()) {
             for (FilterPojo filterPojo : searchPar.getFiltersList()) {
                 if (filterPojo.getFieldName() != null && !filterPojo.getFieldName().isEmpty()
@@ -90,8 +91,10 @@ public class StockTransactionController extends BaseRestController<StkTransHeade
                         } catch (ParseException ex) {
                             Logger.getLogger(StockTransactionController.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                    } else if (filterPojo.getFieldName().equals("accountCode")) {
-                        accountCode = filterPojo.getFilter();
+                    } else if (filterPojo.getFieldName().equals("cabinetno")) {
+                        cabinetno = filterPojo.getFilter();
+                    } else if(filterPojo.getFieldName().equals("stkTransType")){
+                        stkTransType =Integer.parseInt(filterPojo.getFilter()) ;
                     }
                 } else {
                     throw new BusinessException("invalid search data");
@@ -103,7 +106,7 @@ public class StockTransactionController extends BaseRestController<StkTransHeade
             //                throw new BusinessException("User Can't use this App");
             //            }
             else {
-                specification = stockTransactionSpecifications.buildViewStockTransactionDataFromMobile(branchNo, transRef, transDate, transNo, accountCode);
+                specification = stockTransactionSpecifications.buildViewStockTransactionDataFromMobile(branchNo, transRef, transDate, transNo, cabinetno,stkTransType);
             }
         }
         return specification;

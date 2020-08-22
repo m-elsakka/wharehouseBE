@@ -8,7 +8,7 @@ package com.wharehouse.wharehouseBE.security.model.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.wharehouse.wharehouseBE.model.entities.CrudBaseEntity;
-import com.wharehouse.wharehouseBE.model.entities.StkAccounts;
+import com.wharehouse.wharehouseBE.model.entities.StkCabinet;
 import com.wharehouse.wharehouseBE.security.enums.UserLevelEnum;
 import java.io.Serializable;
 import java.util.List;
@@ -89,8 +89,8 @@ public class Users extends CrudBaseEntity implements Serializable {
             joinColumns = {
                 @JoinColumn(name = "user_id", referencedColumnName = "ID")},
             inverseJoinColumns = {
-                @JoinColumn(name = "account_id", referencedColumnName = "ACCOUNT_CODE")})
-    private List<StkAccounts> stkAccountsList;
+                @JoinColumn(name = "account_id", referencedColumnName = "cabinet_code")})
+    private List<StkCabinet> stkAccountsList;
 
 //    @JsonIgnore
 //    @JoinColumn(name = "line_manager", referencedColumnName = "id", insertable = false, updatable = false)
@@ -144,13 +144,15 @@ public class Users extends CrudBaseEntity implements Serializable {
         this.changePassword = changePassword;
     }
 
-    public List<StkAccounts> getStkAccountsList() {
+    public List<StkCabinet> getStkAccountsList() {
         return stkAccountsList;
     }
 
-    public void setStkAccountsList(List<StkAccounts> stkAccountsList) {
+    public void setStkAccountsList(List<StkCabinet> stkAccountsList) {
         this.stkAccountsList = stkAccountsList;
     }
+
+  
 
     public Users(Long id, String userName, String password) {
         this.userName = userName;

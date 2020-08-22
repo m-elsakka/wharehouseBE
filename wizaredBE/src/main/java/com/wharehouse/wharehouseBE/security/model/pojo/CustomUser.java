@@ -5,7 +5,7 @@
  */
 package com.wharehouse.wharehouseBE.security.model.pojo;
 
-import com.wharehouse.wharehouseBE.model.entities.StkAccounts;
+import com.wharehouse.wharehouseBE.model.entities.StkCabinet;
 import java.util.Collection;
 import java.util.List;
 import org.springframework.security.core.userdetails.User;
@@ -23,7 +23,7 @@ public class CustomUser extends User {
     private final String lastName;
     private final short isAdmin;
     private final String branchNo;
-    private final List<StkAccounts> stkAccountseList;
+    private final List<StkCabinet> stkAccountseList;
 
     public CustomUser(String username, String password, boolean enabled,
             boolean accountNonExpired, boolean credentialsNonExpired,
@@ -39,11 +39,11 @@ public class CustomUser extends User {
         this.id = id;
         this.branchNo=branchNo;
         this.isAdmin = isAdmin;
-        this.stkAccountseList = (List<StkAccounts>) stkAccountseList;
+        this.stkAccountseList = (List<StkCabinet>) stkAccountseList;
 
     }
 
-    public List<StkAccounts> getStkAccountseList() {
+    public List<StkCabinet> getStkAccountseList() {
         return stkAccountseList;
     }
     

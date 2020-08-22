@@ -45,7 +45,7 @@ public class InOutController extends BaseRestController<StkTransHeader> {
         try {
             //validateCrudOperation(CrudOpTypesEnum.FIND.getCrudTypeId());
             List<StkTransHeader> resultList = null;
-            resultList = stkTransHeaderRepository.findByAccountType(inOutType);
+            //resultList = stkTransHeaderRepository.findByAccountType(inOutType);
 
             return findObjectResponseEntity(resultList, headerAuthorization);
         } catch (Exception exception) {

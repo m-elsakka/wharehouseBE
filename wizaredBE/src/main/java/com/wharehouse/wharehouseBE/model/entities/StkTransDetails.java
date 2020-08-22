@@ -63,6 +63,10 @@ public class StkTransDetails extends BaseEntity implements Serializable {
     //@JsonIgnore
     private Item itemno;
     
+    
+    @Column(name = "weight")
+    private Double weight;
+    
     @Transient
     @JsonIgnore
     private String itemNumber;
@@ -187,6 +191,16 @@ public class StkTransDetails extends BaseEntity implements Serializable {
         this.itemNumber = itemNumber;
     }
 
+    public Double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Double weight) {
+        this.weight = weight;
+    }
+
+    
+    
     @Override
     public int hashCode() {
         int hash = 0;

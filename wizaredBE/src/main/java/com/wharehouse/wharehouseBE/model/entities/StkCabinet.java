@@ -25,41 +25,29 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Rawan.Ahmed
  */
 @Entity
-@Table(name = "STK_ACCOUNTS")
+@Table(name = "stk_cabinet")
 @XmlRootElement
-public class StkAccounts extends BaseEntity implements Serializable {
+public class StkCabinet extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 15)
-    @Column(name = "ACCOUNT_CODE")
+    @Column(name = "cabinet_code")
     private String cabinetno;
     @Size(max = 50)
-    @Column(name = "ACCOUNT_NAMEA")
+    @Column(name = "cabinet_namea")
     private String cabinetnamea;
     @Size(max = 50)
-    @Column(name = "ACCOUNT_NAMEE")
+    @Column(name = "cabinet_namee")
     private String cabinetnamee;
-    @Size(max = 20)
-    @Column(name = "ACCOUNT_REF")
-    @JsonIgnore
-    private String accountRef;
-    @Column(name = "LAST_TR_DATE")
-    @Temporal(TemporalType.TIMESTAMP)
-    @JsonIgnore
-    private Date lastTrDate;
+
     @Size(max = 50)
     @Column(name = "DESCREPTION")
     @JsonIgnore
     private String descreption;
-    @Column(name = "SUSPEND")
-    @JsonIgnore
-    private Character suspend;
-    @Column(name = "KEEP_HISTORY")
-    @JsonIgnore
-    private Character keepHistory;
+
     
     @Size(max = 1)
     @Column(name = "ACTIVE")
@@ -79,7 +67,7 @@ public class StkAccounts extends BaseEntity implements Serializable {
     @JsonIgnore
     private StkAccountGroup groupCode;*/
 
-    public StkAccounts() {
+    public StkCabinet() {
     }
 
     public String getCabinetno() {
@@ -106,26 +94,6 @@ public class StkAccounts extends BaseEntity implements Serializable {
         this.cabinetnamee = cabinetnamee;
     }
 
-   
-
-   
-
-    public String getAccountRef() {
-        return accountRef;
-    }
-
-    public void setAccountRef(String accountRef) {
-        this.accountRef = accountRef;
-    }
-
-    public Date getLastTrDate() {
-        return lastTrDate;
-    }
-
-    public void setLastTrDate(Date lastTrDate) {
-        this.lastTrDate = lastTrDate;
-    }
-
     public String getDescreption() {
         return descreption;
     }
@@ -134,22 +102,7 @@ public class StkAccounts extends BaseEntity implements Serializable {
         this.descreption = descreption;
     }
 
-    public Character getSuspend() {
-        return suspend;
-    }
-
-    public void setSuspend(Character suspend) {
-        this.suspend = suspend;
-    }
-
-    public Character getKeepHistory() {
-        return keepHistory;
-    }
-
-    public void setKeepHistory(Character keepHistory) {
-        this.keepHistory = keepHistory;
-    }
-
+  
     public String getActive() {
         return active;
     }
@@ -205,10 +158,10 @@ public class StkAccounts extends BaseEntity implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof StkAccounts)) {
+        if (!(object instanceof StkCabinet)) {
             return false;
         }
-        StkAccounts other = (StkAccounts) object;
+        StkCabinet other = (StkCabinet) object;
         if ((this.cabinetno == null && other.cabinetno != null) || (this.cabinetno != null && !this.cabinetno.equals(other.cabinetno))) {
             return false;
         }

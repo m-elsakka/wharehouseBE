@@ -1,6 +1,6 @@
 package com.wharehouse.wharehouseBE.security.model.pojo;
 
-import com.wharehouse.wharehouseBE.model.entities.StkAccounts;
+import com.wharehouse.wharehouseBE.model.entities.StkCabinet;
 import com.wharehouse.wharehouseBE.security.model.entities.Authority;
 import java.util.List;
 
@@ -11,7 +11,7 @@ public class UserLoginResponse {
     private String branchno;
     private Long id;
     private List<Authority> authorities;
-    private List<StkAccounts> stkAccountses;
+    private List<StkCabinet> stkAccountses;
 
     public UserLoginResponse() {
     }
@@ -56,11 +56,11 @@ public class UserLoginResponse {
         this.branchno = branchno;
     }
 
-    public List<StkAccounts> getStkAccountses() {
+    public List<StkCabinet> getStkAccountses() {
         return stkAccountses;
     }
 
-    public void setStkAccountses(List<StkAccounts> stkAccountses) {
+    public void setStkAccountses(List<StkCabinet> stkAccountses) {
         this.stkAccountses = stkAccountses;
     }
     
