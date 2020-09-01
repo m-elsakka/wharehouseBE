@@ -8,20 +8,18 @@ package com.wharehouse.wharehouseBE.model.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *
- * @author Rawan.Ahmed
+ * @author Ahmed.Gaber
  */
-@Embeddable
-public class StkTransDetailsPK implements Serializable {
+public class StkTransCategoryPK implements Serializable {
 
     @Basic(optional = false)
     @NotNull
@@ -31,24 +29,21 @@ public class StkTransDetailsPK implements Serializable {
     private Date productiondate;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 15)
     @Column(name = "category_code")
-    @JsonIgnore
+    //@JsonIgnore
     private String categoryCode;
     @Basic(optional = false)
     @NotNull
     @Column(name = "TRANS_NO")
-    @JsonIgnore
+    //@JsonIgnore
     private long transNo;
 
-    public StkTransDetailsPK() {
-    }
-
-    public StkTransDetailsPK(Date productiondate, String categoryCode, long transNo) {
-        this.productiondate = productiondate;
-        this.categoryCode = categoryCode;
-        this.transNo = transNo;
-    }
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "barcode")
+    //@JsonIgnore
+    private String barcode;
+    
 
     public Date getProductiondate() {
         return productiondate;
@@ -74,29 +69,49 @@ public class StkTransDetailsPK implements Serializable {
         this.transNo = transNo;
     }
 
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
+    }
+
+    public StkTransCategoryPK() {
+    }
+
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (productiondate != null ? productiondate.hashCode() : 0);
-        hash += (categoryCode != null ? categoryCode.hashCode() : 0);
-        hash += (int) transNo;
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.productiondate);
+        hash = 97 * hash + Objects.hashCode(this.categoryCode);
+        hash = 97 * hash + (int) (this.transNo ^ (this.transNo >>> 32));
+        hash = 97 * hash + Objects.hashCode(this.barcode);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof StkTransDetailsPK)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        StkTransDetailsPK other = (StkTransDetailsPK) object;
-        if ((this.productiondate == null && other.productiondate != null) || (this.productiondate != null && !this.productiondate.equals(other.productiondate))) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        if ((this.categoryCode == null && other.categoryCode != null) || (this.categoryCode != null && !this.categoryCode.equals(other.categoryCode))) {
-            return false;
-        }
+        final StkTransCategoryPK other = (StkTransCategoryPK) obj;
         if (this.transNo != other.transNo) {
+            return false;
+        }
+        if (!Objects.equals(this.categoryCode, other.categoryCode)) {
+            return false;
+        }
+        if (!Objects.equals(this.barcode, other.barcode)) {
+            return false;
+        }
+        if (!Objects.equals(this.productiondate, other.productiondate)) {
             return false;
         }
         return true;
@@ -104,7 +119,11 @@ public class StkTransDetailsPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.wharehouse.wharehouseBE.model.entities.StkTransDetailsPK[ productiondate=" + productiondate + ", itemno=" + categoryCode + ", transNo=" + transNo + " ]";
+        return "StkTransCategoryPK{" + "productiondate=" + productiondate + ", categoryCode=" + categoryCode + ", transNo=" + transNo + ", barcode=" + barcode + '}';
     }
+    
+    
+    
+    
     
 }

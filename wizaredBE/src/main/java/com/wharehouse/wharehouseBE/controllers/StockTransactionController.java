@@ -6,11 +6,13 @@
 package com.wharehouse.wharehouseBE.controllers;
 
 import com.wharehouse.wharehouseBE.business.dao.repositories.BranchRepository;
+import com.wharehouse.wharehouseBE.business.dao.repositories.StkTransCategoryRepository;
 import com.wharehouse.wharehouseBE.business.dao.repositories.StkTransHeaderRepository;
 import com.wharehouse.wharehouseBE.business.dao.specifications.StockTransactionSpecifications;
 //import com.wharehouse.wharehouseBE.business.service.HandleLossQuantitiesService;
 import com.wharehouse.wharehouseBE.exceptions.BusinessException;
 import com.wharehouse.wharehouseBE.model.entities.Branch;
+import com.wharehouse.wharehouseBE.model.entities.StkTransCategory;
 import com.wharehouse.wharehouseBE.model.entities.StkTransDetails;
 import com.wharehouse.wharehouseBE.model.entities.StkTransHeader;
 import com.wharehouse.wharehouseBE.model.enums.ResponseMessageEnum;
@@ -49,6 +51,9 @@ public class StockTransactionController extends BaseRestController<StkTransHeade
 //    private HandleLossQuantitiesService handleLossQuantitiesService;
     @Autowired
     private BranchRepository branchRepository;
+    
+    @Autowired
+    private  StkTransCategoryRepository stkTransCategoryRepository;
 
     private StockTransactionSpecifications stockTransactionSpecifications;
     private SimpleDateFormat formatter;
@@ -93,8 +98,8 @@ public class StockTransactionController extends BaseRestController<StkTransHeade
                         }
                     } else if (filterPojo.getFieldName().equals("cabinetno")) {
                         cabinetno = filterPojo.getFilter();
-                    } else if(filterPojo.getFieldName().equals("stkTransType")){
-                        stkTransType =Integer.parseInt(filterPojo.getFilter()) ;
+                    } else if (filterPojo.getFieldName().equals("stkTransType")) {
+                        stkTransType = Integer.parseInt(filterPojo.getFilter());
                     }
                 } else {
                     throw new BusinessException("invalid search data");
@@ -106,7 +111,7 @@ public class StockTransactionController extends BaseRestController<StkTransHeade
             //                throw new BusinessException("User Can't use this App");
             //            }
             else {
-                specification = stockTransactionSpecifications.buildViewStockTransactionDataFromMobile(branchNo, transRef, transDate, transNo, cabinetno,stkTransType);
+                specification = stockTransactionSpecifications.buildViewStockTransactionDataFromMobile(branchNo, transRef, transDate, transNo, cabinetno, stkTransType);
             }
         }
         return specification;
@@ -149,6 +154,7 @@ public class StockTransactionController extends BaseRestController<StkTransHeade
                 } else {
                     throw new BusinessException("This transaction not available");
                 }
+                stkTransHeaderRepository.flush();
                 editObj = editData(editObj, jsonList);
                 editedList.add(editObj);
                 // }
@@ -158,6 +164,7 @@ public class StockTransactionController extends BaseRestController<StkTransHeade
                 throw new BusinessException("No transactions found");
             }
         } catch (Exception ex) {
+            ex.printStackTrace();
             return buildExceptionResponseEntity(ex, headerAuthorization);
         }
     }
@@ -169,19 +176,43 @@ public class StockTransactionController extends BaseRestController<StkTransHeade
         editObj.setStatus("SC");
         for (StkTransDetails detail : editObj.getStkTransDetailsList()) {
             StkTransDetails jsonDetail = jsonObj.getStkTransDetailsList().stream()
-                    .filter(line -> line.getItemNumber().equals(detail.getItemNumber()))
+                    .filter(line -> line.getCategoryCode().equals(detail.getCategoryCode()))
                     .collect(Collectors.toList()).get(0);
-            detail.setQCrt(jsonDetail.getQCrt());
-            //detail.setQPlt(jsonDetail.getQPlt());
-            // detail.setStoreKepperComments(jsonDetail.getStoreKepperComments());
+            detail.setqCrt(jsonDetail.getqCrt());
+            detail.setCatWeight(jsonDetail.getCatWeight());
+
+            for (StkTransCategory catObj : jsonDetail.getStkTransCategoryList()) {
+                catObj.setProductiondate(detail.getStkTransDetailsPK().getProductiondate());
+            }
+            
+            detail.getStkTransCategoryList().clear();
+            List<StkTransCategory> stkCatDetail = jsonDetail.getStkTransCategoryList().stream()
+                            .filter(line -> line.getCategoryCode().equals(detail.getCategoryCode()))
+                            .filter(line -> line.getAddedManually().equalsIgnoreCase("N"))
+                            .collect(Collectors.toList());
+            detail.getStkTransCategoryList().addAll(stkCatDetail);
+            
+            // not Added flag = Y
+//             List<StkTransCategory> stkCatDetailNewAdded = jsonDetail.getStkTransCategoryList().stream()
+//                            .filter(line -> line.getCategoryCode().equals(detail.getCategoryCode()))
+//                            .filter(line -> line.getAddedManually().equalsIgnoreCase("Y"))
+//                            .collect(Collectors.toList());
+//            if(stkCatDetailNewAdded!=null && !stkCatDetailNewAdded.isEmpty()){
+//                 saveCatDetails(stkCatDetailNewAdded);
+//            } 
         }
         return editObj;
     }
 
+//    private void saveCatDetails(List<StkTransCategory> list){
+//        for (StkTransCategory object : list) {
+//            stkTransCategoryRepository.save(object);
+//        }
+//    }
+    
     private void save(List<StkTransHeader> editList) {
         for (StkTransHeader obj : editList) {
             saveEntity(obj);
-//            handleLossQuantitiesService.addLineToStkHeaderLoss(obj);
         }
     }
 

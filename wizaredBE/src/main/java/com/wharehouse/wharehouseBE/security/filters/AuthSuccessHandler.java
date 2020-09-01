@@ -96,7 +96,7 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
             userLoginResponse.setBranchno(customUser.getBranchNo());
             List authorities = new ArrayList(customUser.getAuthorities());
             userLoginResponse.setAuthorities(authorities);
-            userLoginResponse.setStkAccountses(customUser.getStkAccountseList());
+            userLoginResponse.setStkCabinetList(customUser.getStkAccountseList());
             responsePojo.setSuccess(true);
             responsePojo.setData(userLoginResponse);
         }
