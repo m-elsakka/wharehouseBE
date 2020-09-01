@@ -69,7 +69,7 @@ public class BaseRestController<T extends Serializable> {
     public BaseRestController() {
         canCreate = true;
         canEdit = true;
-        canDelete = false;
+        canDelete = true;
         canFind = true;
     }
 //</editor-fold>
@@ -263,7 +263,7 @@ public class BaseRestController<T extends Serializable> {
 
         }
     }
-
+ 
     @RequestMapping(value = "create", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
     public @ResponseBody
     ResponseEntity create(@RequestHeader(value = HttpHeaders.AUTHORIZATION) String headerAuthorization,
@@ -458,7 +458,7 @@ public class BaseRestController<T extends Serializable> {
     @RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
     public @ResponseBody
     ResponseEntity delete(@RequestHeader(value = HttpHeaders.AUTHORIZATION) String headerAuthorization,
-            @PathVariable Long id) throws Exception {
+            @PathVariable String id) throws Exception {
         try {
             validateCrudOperation(CrudOpTypesEnum.DELETE.getCrudTypeId());
             if (genericJpARepository.existsById(id)) {
