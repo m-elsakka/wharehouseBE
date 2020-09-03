@@ -65,9 +65,11 @@ public class StkTransHeader extends BaseEntity implements Serializable {
 //    @Size(max = 3)
 //    @Column(name = "account_type")
 //    private String accountType;
+    @JsonIgnore
     @JoinColumn(name = "ACCOUNT_C", referencedColumnName = "cabinet_code", insertable = true, updatable = true)
     @ManyToOne(fetch = FetchType.LAZY)
     private StkCabinet accountC;
+    @JsonIgnore
     @JoinColumn(name = "ACCOUNT_D", referencedColumnName = "cabinet_code", insertable = true, updatable = true)
     @ManyToOne(fetch = FetchType.LAZY)
     private StkCabinet accountD;
@@ -78,12 +80,10 @@ public class StkTransHeader extends BaseEntity implements Serializable {
 //    @JsonIgnore
 //    @OneToMany(orphanRemoval = true, mappedBy = "stkTransHeader", fetch = FetchType.LAZY)
 //    private List<StkTransLoss> stkTransLossList;
+    @JsonIgnore
     @JoinColumn(name = "BRANCHNO", referencedColumnName = "BRANCHNO")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Branch branchno;
-
-    @Transient
-    private List<Category> categoryList;
 
     public StkTransHeader() {
     }
@@ -146,39 +146,6 @@ public class StkTransHeader extends BaseEntity implements Serializable {
 
     public void setAccountD(StkCabinet accountD) {
         this.accountD = accountD;
-    }
-
-    public List<Category> getCategoryList() {
-        List<Category> categoryList = new ArrayList<>();
-        if (stkTransDetailsList != null && !stkTransDetailsList.isEmpty()) {
-            for (int i = 0; i < stkTransDetailsList.size(); i++) {
-                String catno = stkTransDetailsList.get(i).getItemno().getCategoryno();
-                Integer qrt = stkTransDetailsList.get(i).getQCrt();
-                Double weight = stkTransDetailsList.get(i).getWeight();
-                Category catObj = new Category();
-
-                for (int j = i +1; j < stkTransDetailsList.size(); j++) {
-                    if (catno != null && !catno.isEmpty() && catno.equals(stkTransDetailsList.get(j).getItemno().getCategoryno())) {
-                        catObj.setCategoryCode(catno);
-                        catObj.setCategoryNamea(stkTransDetailsList.get(i).getItemno().getCategory().getCategoryNamea());
-                        catObj.setCategoryNamee(stkTransDetailsList.get(i).getItemno().getCategory().getCategoryNamee());
-                        qrt += stkTransDetailsList.get(j).getQCrt();
-                        weight += stkTransDetailsList.get(j).getWeight();
-                    }
-                }
-                if (catObj.getCategoryCode() != null && !catObj.getCategoryCode().isEmpty()) {
-                    catObj.setCtrSum(qrt);
-                    catObj.setWeigthSum(weight);
-                    categoryList.add(catObj);
-                }
-            }
-        }
-
-        return categoryList;
-    }
-
-    public void setCategoryList(List<Category> categoryList) {
-        this.categoryList = categoryList;
     }
 
     @XmlTransient

@@ -52,17 +52,7 @@ public class Category extends BaseEntity implements Serializable{
     @JoinColumn(name = "parent_id", referencedColumnName = "category_code")
     @ManyToOne(fetch = FetchType.LAZY)
     private com.wharehouse.wharehouseBE.model.entities.Category parentId;
-    
-    @JsonIgnore
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
-    private List<Item> itemList;
-    
-    @Transient
-    private Integer ctrSum;
-    
-    @Transient
-    private Double weigthSum;
-    
+        
 
     public Category() {
     }
@@ -111,34 +101,6 @@ public class Category extends BaseEntity implements Serializable{
     public void setParentId(com.wharehouse.wharehouseBE.model.entities.Category parentId) {
         this.parentId = parentId;
     }
-
-    public List<Item> getItemList() {
-        return itemList;
-    }
-
-    public void setItemList(List<Item> itemList) {
-        this.itemList = itemList;
-    }
-
-    public Integer getCtrSum() {
-        return ctrSum;
-    }
-
-    public void setCtrSum(Integer ctrSum) {
-        this.ctrSum = ctrSum;
-    }
-
-    public Double getWeigthSum() {
-        return weigthSum;
-    }
-
-    public void setWeigthSum(Double weigthSum) {
-        this.weigthSum = weigthSum;
-    }
-
-    
-    
-    
     
     @Override
     public int hashCode() {

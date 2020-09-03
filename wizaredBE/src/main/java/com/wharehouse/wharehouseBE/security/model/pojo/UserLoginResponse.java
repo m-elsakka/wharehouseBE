@@ -11,7 +11,7 @@ public class UserLoginResponse {
     private String branchno;
     private Long id;
     private List<Authority> authorities;
-    private List<StkCabinet> stkAccountses;
+    private List<StkCabinet> stkCabinetList;
 
     public UserLoginResponse() {
     }
@@ -56,14 +56,13 @@ public class UserLoginResponse {
         this.branchno = branchno;
     }
 
-    public List<StkCabinet> getStkAccountses() {
-        return stkAccountses;
+    public List<StkCabinet> getStkCabinetList() {
+        return stkCabinetList;
     }
 
-    public void setStkAccountses(List<StkCabinet> stkAccountses) {
-        this.stkAccountses = stkAccountses;
+    public void setStkCabinetList(List<StkCabinet> stkCabinetList) {
+        this.stkCabinetList = stkCabinetList;
     }
-    
     
     
 }

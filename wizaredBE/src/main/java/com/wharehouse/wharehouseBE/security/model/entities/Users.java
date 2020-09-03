@@ -90,18 +90,9 @@ public class Users extends CrudBaseEntity implements Serializable {
                 @JoinColumn(name = "user_id", referencedColumnName = "ID")},
             inverseJoinColumns = {
                 @JoinColumn(name = "account_id", referencedColumnName = "cabinet_code")})
-    private List<StkCabinet> stkAccountsList;
+    private List<StkCabinet> stkCabinetList;
 
-//    @JsonIgnore
-//    @JoinColumn(name = "line_manager", referencedColumnName = "id", insertable = false, updatable = false)
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    private Users lineManger;
-//
-//    @JsonIgnore
-//    @OneToMany(mappedBy = "lineManger", fetch = FetchType.LAZY)
-//    private List<Users> subordinatList;
-//
-//
+
     @Column(name = "branchno")
     private String branchNo;
 
@@ -144,13 +135,16 @@ public class Users extends CrudBaseEntity implements Serializable {
         this.changePassword = changePassword;
     }
 
-    public List<StkCabinet> getStkAccountsList() {
-        return stkAccountsList;
+    public List<StkCabinet> getStkCabinetList() {
+        return stkCabinetList;
     }
 
-    public void setStkAccountsList(List<StkCabinet> stkAccountsList) {
-        this.stkAccountsList = stkAccountsList;
+    public void setStkCabinetList(List<StkCabinet> stkCabinetList) {
+        this.stkCabinetList = stkCabinetList;
     }
+
+  
+    
 
   
 
