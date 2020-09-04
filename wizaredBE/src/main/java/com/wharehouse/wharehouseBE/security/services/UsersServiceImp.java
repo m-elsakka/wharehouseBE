@@ -6,13 +6,22 @@
 package com.wharehouse.wharehouseBE.security.services;
 
 import com.wharehouse.wharehouseBE.exceptions.BusinessException;
+import com.wharehouse.wharehouseBE.model.ConstantStrings;
+import com.wharehouse.wharehouseBE.model.dto.ChangePassword;
+import com.wharehouse.wharehouseBE.security.daos.UserAuthorityRepositiry;
 import com.wharehouse.wharehouseBE.security.daos.UsersRepository;
+import com.wharehouse.wharehouseBE.security.model.entities.UserAuthority;
 import com.wharehouse.wharehouseBE.security.model.entities.Users;
+import com.wharehouse.wharehouseBE.security.utils.JWTUtil;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.wharehouse.wharehouseBE.security.model.entities.Authority;
 
 @Transactional
 @Service
@@ -27,18 +36,18 @@ public class UsersServiceImp implements UsersService {
 //    @Autowired
 //    private TeamLeadUserHierViewRepository teamLeadUserHierViewRepository;
 //
-//    @Autowired
-//    private UserAuthorityRepositiry userAuthorityRepositiry;
+    @Autowired
+    private UserAuthorityRepositiry userAuthorityRepositiry;
     @Override
     public Users save(Users user) {
-//        List<Long> authorityIdList = user.getAuthorities().stream()
-//                .map(Authority::getId)
-//                .collect(Collectors.toList());
+        List<Long> authorityIdList = user.getAuthorities().stream()
+                .map(Authority::getId)
+                .collect(Collectors.toList());
         if (user.getPassword() != null && !user.getPassword().isEmpty()) {
-//            if (user.isChangePassword()) {
-//                //checkPasswordLength(user.getPassword());
-//                user.setPassword(bcryptEncodeString(user.getPassword()));
-//            }
+            if (user.isChangePassword()) {
+                checkPasswordLength(user.getPassword());
+                user.setPassword(bcryptEncodeString(user.getPassword()));
+            }
         } else {
             // if (authorityIdList.contains(UserRolesNumberEnum.ROLE_SALES_FORCE.getRoleNumber())) {
             //throw new BusinessException("ROLE_SALES_FORCE_SHOULD_HAS_PASSWORD");
@@ -47,7 +56,7 @@ public class UsersServiceImp implements UsersService {
 
         }
         Users SavedUser = userRepository.save(user);
-        // manageUserRoles(SavedUser, authorityIdList);
+         manageUserRoles(SavedUser, authorityIdList);
         return SavedUser;
     }
 
@@ -82,9 +91,9 @@ public class UsersServiceImp implements UsersService {
         }
 
         Users user = userOptional.get();
-//        if (user.getActive() == 0) {
-//            throw new BusinessException("user inactive");
-//        }
+        if (user.getActive() == 0) {
+            throw new BusinessException("user inactive");
+        }
 
         //https://stackoverflow.com/questions/26905721/decode-the-bcrypt-encoded-password-in-spring-security-to-deactivate-user-account
         //bcrypt GENERATE DIFFRENT HAS TO SAME ROW PW SO EQUAL CAN NOT BE USED
@@ -95,35 +104,35 @@ public class UsersServiceImp implements UsersService {
 
     }
 
-//    private void checkPasswordLength(String password) {
-//        if (password.length() < ConstantStrings.MIN_PASSWOED_LENGTH)//min 6
-//        {
-//            throw new BusinessException("invalid password length min 6");
-//        }
-//    }
-//    @Override
-//    public String changePassword(ChangePassword changePW) throws BusinessException {
-//        //check
-//        changePW.setUsername(changePW.getUsername().toLowerCase());
-//        Users userObj = new Users();
-//        userObj.setUserName(changePW.getUsername());
-//        userObj.setPassword(changePW.getOldPassword());
-//
-//        userObj = checkUserAccount(userObj);
-//        if (!(changePW.getNewPassword().equals(changePW.getConfirmedNewPassword()))) {
-//            throw new BusinessException("password not match");
-//        }
-//        if ((changePW.getNewPassword().equals(changePW.getOldPassword()))) {
-//            throw new BusinessException("password equal old");
-//        }
-//
-//        checkPasswordLength(changePW.getNewPassword());
-//
-//        userObj.setPassword(bcryptEncodeString(changePW.getNewPassword()));
-//        userRepository.save(userObj);
-//
-//        return JWTUtil.generateToken(userObj.getUserName(), userObj.getAuthorities().toArray());
-//    }
+    private void checkPasswordLength(String password) {
+        if (password.length() < ConstantStrings.MIN_PASSWOED_LENGTH)//min 6
+        {
+            throw new BusinessException("invalid password length min 6");
+        }
+    }
+    @Override
+    public String changePassword(ChangePassword changePW) throws BusinessException {
+        //check
+        changePW.setUsername(changePW.getUsername().toLowerCase());
+        Users userObj = new Users();
+        userObj.setUserName(changePW.getUsername());
+        userObj.setPassword(changePW.getOldPassword());
+
+        userObj = checkUserAccount(userObj);
+        if (!(changePW.getNewPassword().equals(changePW.getConfirmedNewPassword()))) {
+            throw new BusinessException("password not match");
+        }
+        if ((changePW.getNewPassword().equals(changePW.getOldPassword()))) {
+            throw new BusinessException("password equal old");
+        }
+
+        checkPasswordLength(changePW.getNewPassword());
+
+        userObj.setPassword(bcryptEncodeString(changePW.getNewPassword()));
+        userRepository.save(userObj);
+
+        return JWTUtil.generateToken(userObj.getUserName(), userObj.getAuthorities().toArray());
+    }
     private String bcryptEncodeString(String text) {
         return bcryptEncoder.encode(text);
     }
@@ -182,39 +191,39 @@ public class UsersServiceImp implements UsersService {
 //        }
 //    }
 //
-//    private void manageUserRoles(Users updateUser, List<Long> authorityIdList) {
-//
-//        List<UserAuthority> oldRoles = userAuthorityRepositiry.findUserAuthorityByUserId(updateUser.getId());
-//        List<UserAuthority> deletingList = null;
-//        deletingList = new ArrayList<>();
-//
-//        if (oldRoles != null && !oldRoles.isEmpty()) {
-//            for (UserAuthority userAuthority : oldRoles) {
-//                if (!authorityIdList.contains(userAuthority.getAuthorityId())) {
-//                    deletingList.add(userAuthority);
-//                    authorityIdList.remove(userAuthority.getAuthorityId());
-//                }
-//            }
-//        }
-//        saveUserRoles(updateUser, deletingList, authorityIdList);
-//
-//    }
-//
-//    private void saveUserRoles(Users user, List<UserAuthority> deledtingList, List<Long> savingAuthIdList) {
-//        UserAuthority newUserAuthority = null;
-//        if (deledtingList != null && !deledtingList.isEmpty()) {
-//            userAuthorityRepositiry.deleteInBatch(deledtingList);
-//        }
-//
-//        if (savingAuthIdList != null && !savingAuthIdList.isEmpty()) {
-//            List<UserAuthority> savingList = new ArrayList<>();
-//            for (Long authId : savingAuthIdList) {
-//                newUserAuthority = new UserAuthority();
-//                newUserAuthority.setAuthorityId(authId);
-//                newUserAuthority.setUserId(user.getId());
-//                savingList.add(newUserAuthority);
-//            }
-//            userAuthorityRepositiry.saveAll(savingList);
-//        }
-//    }
+    private void manageUserRoles(Users updateUser, List<Long> authorityIdList) {
+
+        List<UserAuthority> oldRoles = userAuthorityRepositiry.findUserAuthorityByUserId(updateUser.getId());
+        List<UserAuthority> deletingList = null;
+        deletingList = new ArrayList<>();
+
+        if (oldRoles != null && !oldRoles.isEmpty()) {
+            for (UserAuthority userAuthority : oldRoles) {
+                if (!authorityIdList.contains(userAuthority.getAuthorityId())) {
+                    deletingList.add(userAuthority);
+                    authorityIdList.remove(userAuthority.getAuthorityId());
+                }
+            }
+        }
+        saveUserRoles(updateUser, deletingList, authorityIdList);
+
+    }
+
+    private void saveUserRoles(Users user, List<UserAuthority> deledtingList, List<Long> savingAuthIdList) {
+        UserAuthority newUserAuthority = null;
+        if (deledtingList != null && !deledtingList.isEmpty()) {
+            userAuthorityRepositiry.deleteInBatch(deledtingList);
+        }
+
+        if (savingAuthIdList != null && !savingAuthIdList.isEmpty()) {
+            List<UserAuthority> savingList = new ArrayList<>();
+            for (Long authId : savingAuthIdList) {
+                newUserAuthority = new UserAuthority();
+                newUserAuthority.setAuthorityId(authId);
+                newUserAuthority.setUserId(user.getId());
+                savingList.add(newUserAuthority);
+            }
+            userAuthorityRepositiry.saveAll(savingList);
+        }
+    }
 }
