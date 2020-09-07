@@ -32,16 +32,17 @@ public class UserDetailsServiceImp implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         try {
             Optional<Users> userOptional = userService.findByUsername(username);
+            Boolean enabled = true;
             if (userOptional.isPresent()) {
                 Users user = userOptional.get();
                 if (user == null) {
                     throw new UsernameNotFoundException(username);
                 }
-//                if (user.getActive() == 0) {//inactive user
-//                    enabled = false;
-//                }
+                if (user.getActive() == 0) {//inactive user
+                    enabled = false;
+                }
                   return new CustomUser(username,
-                        user.getPassword(), true, true, true, true, mapToGrantedAuthorities(user.getAuthorities()),
+                        user.getPassword(), enabled, true, true, true, mapToGrantedAuthorities(user.getAuthorities()),
                         user.getStkCabinetList(),
                         user.getId(), user.getFirstName(), user.getLastName(),user.getBranchNo(), user.getIsAdmin());
             } else {

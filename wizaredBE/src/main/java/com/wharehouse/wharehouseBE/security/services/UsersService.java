@@ -7,8 +7,8 @@ package com.wharehouse.wharehouseBE.security.services;
 
 
 import com.wharehouse.wharehouseBE.exceptions.BusinessException;
-import com.wharehouse.wharehouseBE.security.model.entities.Users;
-import java.util.List;
+import com.wharehouse.wharehouseBE.model.dto.ChangePassword;
+import com.wharehouse.wharehouseBE.security.model.entities.Users; 
 import java.util.Optional;
 
 public interface UsersService {
@@ -19,7 +19,7 @@ public interface UsersService {
 
     Users checkUserAccount(Users userObj) throws BusinessException;
 
-    //String changePassword(ChangePassword changePW) throws BusinessException;
+    String changePassword(ChangePassword changePW) throws BusinessException;
 //
 //    List<Long> findTeamIdListFromUser(Long userId);
 //

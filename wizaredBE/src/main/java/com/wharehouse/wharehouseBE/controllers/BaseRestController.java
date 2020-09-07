@@ -55,13 +55,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class BaseRestController<T extends Serializable> {
 
     //<editor-fold defaultstate="collapsed" desc="Properties">
-    private final Logger logger = LoggerFactory.getLogger(BaseRestController.class);
+    protected final Logger logger = LoggerFactory.getLogger(BaseRestController.class);
     protected boolean canCreate, canEdit, canDelete, canFind, responseByMobileDto, enableCash;
     ///GenericEntitySpecfications is abstract class if your controller has specification just add speceification class for desired entity
     protected GenericEntitySpecfications<T> genericEntitySpecfications;
 
     @Autowired
-    private GenericJPARepository<T> genericJpARepository;
+    protected GenericJPARepository<T> genericJpARepository;
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Initialization">

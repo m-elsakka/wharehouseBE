@@ -50,9 +50,9 @@ public class Users extends CrudBaseEntity implements Serializable {
     @Size(max = 20)
     @Column(name = "last_name")
     private String lastName;
-//
-//    @Column(name = "active")
-//    private short active;
+
+    @Column(name = "active")
+    private short active;
 //
     @Column(name = "is_admin")
     private short isAdmin;
@@ -264,24 +264,16 @@ public class Users extends CrudBaseEntity implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
     
     
 
-//    public short getActive() {
-//        return active;
-//    }
-//
-//    public void setActive(short active) {
-//        this.active = active;
-//    }
+    public short getActive() {
+        return active;
+    }
+
+    public void setActive(short active) {
+        this.active = active;
+    }
 //
 //    public short getIsS2Account() {
 //        return isS2Account;
@@ -298,10 +290,10 @@ public class Users extends CrudBaseEntity implements Serializable {
         this.isS2AccountFlag = isS2AccountFlag;
     }
 
-//    public boolean isActiveFlag() {
-//        this.activeFlag = this.getActive() == 1;
-//        return activeFlag;
-//    }
+    public boolean isActiveFlag() {
+        this.activeFlag = this.getActive() == 1;
+        return activeFlag;
+    }
     public void setActiveFlag(boolean activeFlag) {
         this.activeFlag = activeFlag;
     }
@@ -337,7 +329,7 @@ public class Users extends CrudBaseEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "com.wharehouse.wharehouseBE.security.model.Users[ user_name=" + id + " ]";
+        return "com.wharehouse.wharehouseBE.security.model.Users[ id=" + id + " ]";
     }
 
 }
