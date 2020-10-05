@@ -6,18 +6,10 @@
 package com.wharehouse.wharehouseBE.controllers;
 
 import com.wharehouse.wharehouseBE.business.dao.repositories.StkTransHeaderRepository;
-import com.wharehouse.wharehouseBE.exceptions.BusinessException;
 import com.wharehouse.wharehouseBE.model.entities.StkTransHeader;
-import com.wharehouse.wharehouseBE.model.enums.CrudOpTypesEnum;
-import com.wharehouse.wharehouseBE.model.pojos.ResponsePojo;
-import com.wharehouse.wharehouseBE.security.utils.JWTUtil;
-import java.util.Arrays;
-import java.util.Base64;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,11 +24,15 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Ahmed.Gaber
  */
 @RestController
-@RequestMapping("transaction/inout")
+@RequestMapping("transactions/inout")
 public class InOutController extends BaseRestController<StkTransHeader> {
 
     @Autowired
     private StkTransHeaderRepository stkTransHeaderRepository;
+
+    public InOutController() {
+
+    }
 
     @RequestMapping(value = "/findInOut/{inOutType}", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
