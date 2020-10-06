@@ -62,6 +62,14 @@ public class StkTransHeader extends BaseEntity implements Serializable {
     @Column(name = "STATUS")
     private String status;
 
+    @Size(max = 2)
+    @Column(name = "op_type")
+    private String opType;
+
+    @Size(max = 100)
+    @Column(name = "description")
+    private String description;
+
 //    @Size(max = 3)
 //    @Column(name = "account_type")
 //    private String accountType;
@@ -147,6 +155,24 @@ public class StkTransHeader extends BaseEntity implements Serializable {
     public void setAccountD(StkCabinet accountD) {
         this.accountD = accountD;
     }
+
+    public String getOpType() {
+        return opType;
+    }
+
+    public void setOpType(String opType) {
+        this.opType = opType;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
+    
 
     @XmlTransient
     public List<StkTransDetails> getStkTransDetailsList() {

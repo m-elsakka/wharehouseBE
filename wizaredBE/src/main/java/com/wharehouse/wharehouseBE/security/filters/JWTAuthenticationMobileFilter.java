@@ -42,12 +42,11 @@ public class JWTAuthenticationMobileFilter extends UsernamePasswordAuthenticatio
 
             String requestJWTBody = null;
             requestJWTBody = IOUtils.toString(req.getReader());
-            //String requestBody = JWTUtil.decodeJWT(requestJWTBody, JWTUtil.getJwtKey(req));
             Users user = new ObjectMapper().readValue(requestJWTBody, Users.class);
-            String decrpPassword = PasswordUtil.decrypt(user.getPassword(), user.getUserName().trim());
+           // String decrpPassword = PasswordUtil.decrypt(user.getPassword(), user.getUserName().trim());
             res.addHeader(JWTUtil.MOBILE_RES_HEADER_KEY, JWTUtil.DEFAULT_KEY);
             return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUserName().trim(),
-                    decrpPassword, new ArrayList<>()));
+                    user.getPassword(), new ArrayList<>()));
 
         } catch (IOException e) {
             throw new RuntimeException(e);

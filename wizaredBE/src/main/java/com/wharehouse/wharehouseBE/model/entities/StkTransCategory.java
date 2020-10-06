@@ -58,7 +58,7 @@ public class StkTransCategory extends BaseEntity implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "TRANS_NO")
-    private long transNo;
+    private Long transNo;
 
     @Id
     @Basic(optional = false)
@@ -82,6 +82,12 @@ public class StkTransCategory extends BaseEntity implements Serializable {
     
     @Column(name = "sequence")
     private Double sequence;
+    
+     @Column(name = "item_name")
+    private Double itemName;
+     
+      @Column(name = "item_code")
+    private Double itemCode;
     
     
     @Transient
@@ -132,11 +138,11 @@ public class StkTransCategory extends BaseEntity implements Serializable {
         this.categoryCode = categoryCode;
     }
 
-    public long getTransNo() {
+    public Long getTransNo() {
         return transNo;
     }
 
-    public void setTransNo(long transNo) {
+    public void setTransNo(Long transNo) {
         this.transNo = transNo;
     }
 
@@ -163,8 +169,22 @@ public class StkTransCategory extends BaseEntity implements Serializable {
     public void setAddedManually(String addedManually) {
         this.addedManually = addedManually;
     }
-    
-    
+
+    public Double getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(Double itemName) {
+        this.itemName = itemName;
+    }
+
+    public Double getItemCode() {
+        return itemCode;
+    }
+
+    public void setItemCode(Double itemCode) {
+        this.itemCode = itemCode;
+    }
     
 
     @Override

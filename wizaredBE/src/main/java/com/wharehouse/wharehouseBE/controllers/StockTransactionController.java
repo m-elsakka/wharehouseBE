@@ -8,6 +8,7 @@ package com.wharehouse.wharehouseBE.controllers;
 import com.wharehouse.wharehouseBE.business.dao.repositories.BranchRepository;
 import com.wharehouse.wharehouseBE.business.dao.repositories.StkTransCategoryRepository;
 import com.wharehouse.wharehouseBE.business.dao.repositories.StkTransHeaderRepository;
+import com.wharehouse.wharehouseBE.business.dao.service.StktransServiceLocal;
 import com.wharehouse.wharehouseBE.business.dao.specifications.StockTransactionSpecifications;
 //import com.wharehouse.wharehouseBE.business.service.HandleLossQuantitiesService;
 import com.wharehouse.wharehouseBE.exceptions.BusinessException;
@@ -47,13 +48,12 @@ public class StockTransactionController extends BaseRestController<StkTransHeade
 
     @Autowired
     private StkTransHeaderRepository stkTransHeaderRepository;
-//    @Autowired
-//    private HandleLossQuantitiesService handleLossQuantitiesService;
+
     @Autowired
     private BranchRepository branchRepository;
-    
+
     @Autowired
-    private  StkTransCategoryRepository stkTransCategoryRepository;
+    private StktransServiceLocal stktransService;
 
     private StockTransactionSpecifications stockTransactionSpecifications;
     private SimpleDateFormat formatter;
@@ -154,11 +154,8 @@ public class StockTransactionController extends BaseRestController<StkTransHeade
                 } else {
                     throw new BusinessException("This transaction not available");
                 }
-                stkTransHeaderRepository.flush();
                 editObj = editData(editObj, jsonList);
-                editedList.add(editObj);
-                // }
-                save(editedList);
+
                 return buildResponseEntity(true, null, ResponseMessageEnum.SUCCESS.getMessage(), HttpStatus.OK, headerAuthorization);
             } else {
                 throw new BusinessException("No transactions found");
@@ -174,46 +171,42 @@ public class StockTransactionController extends BaseRestController<StkTransHeade
             throw new BusinessException("This Transaction already edited by another store Keeper");
         }
         editObj.setStatus("SC");
-        for (StkTransDetails detail : editObj.getStkTransDetailsList()) {
-            StkTransDetails jsonDetail = jsonObj.getStkTransDetailsList().stream()
-                    .filter(line -> line.getCategoryCode().equals(detail.getCategoryCode()))
-                    .collect(Collectors.toList()).get(0);
-            detail.setqCrt(jsonDetail.getqCrt());
-            detail.setCatWeight(jsonDetail.getCatWeight());
-
-            for (StkTransCategory catObj : jsonDetail.getStkTransCategoryList()) {
-                catObj.setProductiondate(detail.getStkTransDetailsPK().getProductiondate());
+        StkTransDetails jsonDetail = null;
+        if (editObj.getOpType() != null && !editObj.getOpType().isEmpty() && editObj.getOpType().equals("1")) {
+            for (StkTransDetails detail : editObj.getStkTransDetailsList()) {
+                jsonDetail = jsonObj.getStkTransDetailsList().stream()
+                        .filter(line -> line.getCategoryCode().equals(detail.getCategoryCode()))
+                        .collect(Collectors.toList()).get(0);
+                detail.setqCrt(jsonDetail.getqCrt());
+                detail.setCatWeight(jsonDetail.getCatWeight());
+                for (StkTransCategory catObj : jsonDetail.getStkTransCategoryList()) {
+                    catObj.setProductiondate(detail.getStkTransDetailsPK().getProductiondate());
+                }
+                for (StkTransCategory stkTransCategory : detail.getStkTransCategoryList()) {
+                    StkTransCategory jsonCatDetail = jsonDetail.getStkTransCategoryList().stream()
+                            .filter(line -> line.getCategoryCode().equals(stkTransCategory.getCategoryCode()))
+                            .filter(line -> line.getTransNo().equals(stkTransCategory.getTransNo()))
+                            .collect(Collectors.toList()).get(0);
+                    stkTransCategory.setWeight(jsonCatDetail.getWeight());
+                }
             }
-            
-            detail.getStkTransCategoryList().clear();
-            List<StkTransCategory> stkCatDetail = jsonDetail.getStkTransCategoryList().stream()
-                            .filter(line -> line.getCategoryCode().equals(detail.getCategoryCode()))
-                            .filter(line -> line.getAddedManually().equalsIgnoreCase("N"))
-                            .collect(Collectors.toList());
-            detail.getStkTransCategoryList().addAll(stkCatDetail);
-            
-            // not Added flag = Y
-//             List<StkTransCategory> stkCatDetailNewAdded = jsonDetail.getStkTransCategoryList().stream()
-//                            .filter(line -> line.getCategoryCode().equals(detail.getCategoryCode()))
-//                            .filter(line -> line.getAddedManually().equalsIgnoreCase("Y"))
-//                            .collect(Collectors.toList());
-//            if(stkCatDetailNewAdded!=null && !stkCatDetailNewAdded.isEmpty()){
-//                 saveCatDetails(stkCatDetailNewAdded);
-//            } 
+        } else if (editObj.getOpType() != null && !editObj.getOpType().isEmpty() && editObj.getOpType().equals("2")) {
+                 if(editObj.getStkTransDetailsList()==null){
+                     editObj.setStkTransDetailsList(new ArrayList<>());
+                 }
+                editObj.getStkTransDetailsList().addAll(jsonObj.getStkTransDetailsList());
+        }
+        stktransService.saveTransHeader(editObj);
+        if (editObj.getOpType() != null && !editObj.getOpType().isEmpty() && editObj.getOpType().equals("1")) {
+            if (jsonDetail.getStkTransCategoryList() != null && !jsonDetail.getStkTransCategoryList().isEmpty()) {
+                saveCatDetails(jsonDetail.getStkTransCategoryList());
+            }
         }
         return editObj;
     }
 
-//    private void saveCatDetails(List<StkTransCategory> list){
-//        for (StkTransCategory object : list) {
-//            stkTransCategoryRepository.save(object);
-//        }
-//    }
-    
-    private void save(List<StkTransHeader> editList) {
-        for (StkTransHeader obj : editList) {
-            saveEntity(obj);
-        }
+    private void saveCatDetails(List<StkTransCategory> stkCatDetailNewAdded) {
+        stktransService.saveCateDetails(stkCatDetailNewAdded);
     }
 
 }
