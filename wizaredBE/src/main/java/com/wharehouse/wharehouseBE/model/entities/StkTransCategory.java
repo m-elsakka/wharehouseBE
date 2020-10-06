@@ -84,12 +84,13 @@ public class StkTransCategory extends BaseEntity implements Serializable {
     private Double sequence;
     
      @Column(name = "item_name")
-    private Double itemName;
+    private String itemName;
      
       @Column(name = "item_code")
-    private Double itemCode;
+    private String itemCode;
     
     
+    @JsonIgnore
     @Transient
     private String addedManually;
     
@@ -170,19 +171,19 @@ public class StkTransCategory extends BaseEntity implements Serializable {
         this.addedManually = addedManually;
     }
 
-    public Double getItemName() {
+    public String getItemName() {
         return itemName;
     }
 
-    public void setItemName(Double itemName) {
+    public void setItemName(String itemName) {
         this.itemName = itemName;
     }
 
-    public Double getItemCode() {
+    public String getItemCode() {
         return itemCode;
     }
 
-    public void setItemCode(Double itemCode) {
+    public void setItemCode(String itemCode) {
         this.itemCode = itemCode;
     }
     
