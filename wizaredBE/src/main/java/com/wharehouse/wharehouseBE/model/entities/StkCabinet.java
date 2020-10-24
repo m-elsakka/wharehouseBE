@@ -7,18 +7,15 @@ package com.wharehouse.wharehouseBE.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -48,10 +45,10 @@ public class StkCabinet extends BaseEntity implements Serializable {
     @JsonIgnore
     private String descreption;
 
-    
     @Size(max = 1)
     @Column(name = "ACTIVE")
     private String active;
+
     /*@OneToMany(mappedBy = "accountC",fetch = FetchType.LAZY)
     @JsonIgnore
     private List<StkTransDescriptor> stkTransDescriptorList;
@@ -66,6 +63,8 @@ public class StkCabinet extends BaseEntity implements Serializable {
     @ManyToOne(optional = false,fetch = FetchType.LAZY)
     @JsonIgnore
     private StkAccountGroup groupCode;*/
+    @Transient
+    private boolean activeFlag;
 
     public StkCabinet() {
     }
@@ -102,7 +101,6 @@ public class StkCabinet extends BaseEntity implements Serializable {
         this.descreption = descreption;
     }
 
-  
     public String getActive() {
         return active;
     }
@@ -110,9 +108,16 @@ public class StkCabinet extends BaseEntity implements Serializable {
     public void setActive(String active) {
         this.active = active;
     }
-    
-    
-    
+
+    public boolean isActiveFlag() {
+        this.activeFlag = this.getActive() != null ? this.getActive().equals("1") : false;
+        return activeFlag;
+    }
+
+    public void setActiveFlag(boolean activeFlag) {
+        this.activeFlag = activeFlag;
+    }
+
     /*
     @XmlTransient
     public List<StkTransDescriptor> getStkTransDescriptorList() {
@@ -147,7 +152,6 @@ public class StkCabinet extends BaseEntity implements Serializable {
     public void setGroupCode(StkAccountGroup groupCode) {
         this.groupCode = groupCode;
     }*/
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -172,5 +176,5 @@ public class StkCabinet extends BaseEntity implements Serializable {
     public String toString() {
         return "com.wharehouse.wharehouseBE.model.entities.StkAccounts[ cabinetno=" + cabinetno + " ]";
     }
-    
+
 }
