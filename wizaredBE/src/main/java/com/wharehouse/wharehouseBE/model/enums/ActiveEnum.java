@@ -5,10 +5,7 @@
  */
 package com.wharehouse.wharehouseBE.model.enums;
 
-/**
- *
- * @author waleed.mohamed
- */
+
 public enum ActiveEnum {
     ACTIVE(1),
     INACTIVE(0);

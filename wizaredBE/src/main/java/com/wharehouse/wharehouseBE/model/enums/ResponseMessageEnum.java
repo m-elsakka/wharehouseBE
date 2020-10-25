@@ -5,10 +5,7 @@
  */
 package com.wharehouse.wharehouseBE.model.enums;
 
-/**
- *
- * @author Waleed.Mohamed
- */
+
 public enum ResponseMessageEnum {
     SUCCESS("success"),
     FAILED("failed"),

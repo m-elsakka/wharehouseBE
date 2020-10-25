@@ -5,10 +5,7 @@
  */
 package com.wharehouse.wharehouseBE.model.pojos;
 
-/**
- *
- * @author Rawan.Ahmed
- */
+
 public class UserValidPojo {
     private boolean success;
     private String exceptionMessage;

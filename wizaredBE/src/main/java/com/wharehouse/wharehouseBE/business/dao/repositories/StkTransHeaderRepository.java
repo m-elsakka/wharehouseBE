@@ -9,12 +9,6 @@ import com.wharehouse.wharehouseBE.business.dao.common.GenericJPARepository;
 import com.wharehouse.wharehouseBE.model.entities.StkTransHeader;
 import java.util.List;
 
-
-
-/**
- *
- * @author Rawan.Ahmed
- */
 public interface StkTransHeaderRepository extends GenericJPARepository<StkTransHeader> {
     
     

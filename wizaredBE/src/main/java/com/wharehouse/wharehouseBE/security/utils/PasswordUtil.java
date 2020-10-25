@@ -7,10 +7,7 @@ package com.wharehouse.wharehouseBE.security.utils;
 
 import java.util.Base64;
 
-/**
- *
- * @author Waleed.Mohamed
- */
+
 public class PasswordUtil {
 
     public static String decrypt(final String hash, String key) {

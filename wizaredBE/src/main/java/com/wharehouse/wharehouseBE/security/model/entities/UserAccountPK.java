@@ -8,10 +8,7 @@ package com.wharehouse.wharehouseBE.security.model.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
-/**
- *
- * @author Ahmed.Gaber
- */
+
 public class UserAccountPK implements Serializable {
 
     private Long userId;

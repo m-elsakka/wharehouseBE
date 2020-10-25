@@ -5,10 +5,7 @@
  */
 package com.wharehouse.wharehouseBE.model.dto;
 
-/**
- *
- * @author Waleed.Mohamed
- */
+
 public class PageDto {
 
     private Object data;

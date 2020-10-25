@@ -15,10 +15,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
-/**
- *
- * @author Ahmed.Gaber
- */
+
 public class StkTransCategoryPK implements Serializable {
 
     @Basic(optional = false)

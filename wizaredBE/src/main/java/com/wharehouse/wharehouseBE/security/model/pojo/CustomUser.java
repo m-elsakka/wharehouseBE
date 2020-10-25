@@ -10,11 +10,7 @@ import java.util.Collection;
 import java.util.List;
 import org.springframework.security.core.userdetails.User;
 
-/**
- *
- * @author rehab.abd-elhamid
- */
-//http://javahotpot.blogspot.com.eg/2013/12/spring-security-adding-more-information.html
+
 public class CustomUser extends User {
 
     private static final long serialVersionUID = -3531439484732724601L;

@@ -6,10 +6,7 @@
 package com.wharehouse.wharehouseBE.security.enums;
 
 
-/**
- *
- * @author waleed.mohamed
- */
+
 public enum UserLevelEnum {
     TEAM_LEAD(1),
     AREA_SALES_MANANGER(2),

@@ -5,10 +5,7 @@
  */
 package com.wharehouse.wharehouseBE.model.enums;
 
-/**
- *
- * @author karim.omran
- */
+
 public enum SortTypeEnum {
     ASC("asc"),
     DESC("desc");

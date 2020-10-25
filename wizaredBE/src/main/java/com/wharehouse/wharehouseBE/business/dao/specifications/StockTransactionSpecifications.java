@@ -21,10 +21,6 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.springframework.data.jpa.domain.Specification;
 
-/**
- *
- * @author Rawan.Ahmed
- */
 public class StockTransactionSpecifications extends GenericEntitySpecfications<StkTransHeader> {
 
     public Specification buildViewStockTransactionDataFromMobile(String branchNo,

@@ -7,10 +7,7 @@ package com.wharehouse.wharehouseBE.security.services;
 
 import com.wharehouse.wharehouseBE.security.model.entities.Tokens;
 
-/**
- *
- * @author Rawan.Ahmed
- */
+
 public interface TokenProvideService {
     
     Tokens create(Tokens token);

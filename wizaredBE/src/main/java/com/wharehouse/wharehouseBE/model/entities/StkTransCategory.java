@@ -26,10 +26,7 @@ import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author Ahmed.Gaber
- */
+
 @Entity
 @Table(name = "stk_details_categeory")
 @XmlRootElement

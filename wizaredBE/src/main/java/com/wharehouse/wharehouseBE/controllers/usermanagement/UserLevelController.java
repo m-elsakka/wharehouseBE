@@ -11,10 +11,7 @@ import com.wharehouse.wharehouseBE.security.model.entities.UserLevel;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- *
- * @author waleed.mohamed
- */
+
 @RestController
 @RequestMapping("/usermanagement/user-levels")
 public class UserLevelController extends BaseRestController<UserLevel> {

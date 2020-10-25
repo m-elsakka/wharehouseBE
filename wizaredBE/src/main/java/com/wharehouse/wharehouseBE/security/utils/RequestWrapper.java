@@ -17,18 +17,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import org.springframework.http.HttpHeaders;
 
-/**
- *
- * @author mohamed.abd-elwadod
- *
- * https://howtodoinjava.com/servlets/httpservletrequestwrapper-example-read-request-body/
- */
 public class RequestWrapper extends HttpServletRequestWrapper {
 
     private final String body;
 
     public RequestWrapper(HttpServletRequest request) throws IOException {
-        //So that other request method behave just like before
         super(request);
 
         String jwtToken = request.getHeader(HttpHeaders.AUTHORIZATION);

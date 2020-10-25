@@ -8,10 +8,7 @@ package com.wharehouse.wharehouseBE.business.dao.repositories;
 import com.wharehouse.wharehouseBE.business.dao.common.GenericJPARepository;
 import com.wharehouse.wharehouseBE.model.entities.Item;
 
-/**
- *
- * @author Ahmed.Gaber
- */
+
 public interface ItemsRepository extends GenericJPARepository<Item>{
     
 }

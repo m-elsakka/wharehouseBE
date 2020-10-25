@@ -17,11 +17,7 @@ import javax.persistence.criteria.Root;
 import org.springframework.core.GenericTypeResolver;
 import org.springframework.data.jpa.domain.Specification;
 
-/**
- *
- * @author Waleed.mohamed
- * @param <T>
- */
+
 public abstract class GenericEntitySpecfications<T extends Serializable> {
 
     public Specification<T> filterEntityList(SearchParPojo searchPar) {

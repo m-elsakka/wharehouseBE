@@ -16,10 +16,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- *
- * @author waleed.mohamed
- */
+
 @RestController
 @RequestMapping("/usermanagement/users-managers")
 public class LineManagerController extends BaseRestController<Users> {

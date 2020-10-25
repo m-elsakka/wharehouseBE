@@ -5,10 +5,7 @@
  */
 package com.wharehouse.wharehouseBE.model.enums;
 
-/**
- *
- * @author Ahmed.Gaber
- */
+
 public enum StkTransTypeEnum {
     
     DELIVER(1),

@@ -9,10 +9,7 @@ import com.wharehouse.wharehouseBE.model.entities.Branch;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- *
- * @author Ahmed.Gaber
- */
+
 
 @RestController
 @RequestMapping("masterdata/branchs")

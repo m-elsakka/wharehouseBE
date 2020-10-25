@@ -11,10 +11,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-/**
- *
- * @author Rawan.Ahmed
- */
+
 public interface TokenRepository  extends GenericJPARepository<Tokens>{
       
     @Query("SELECT COUNT(t.token) FROM Tokens t WHERE (t.userName =  :username) and (t.token = :token)")

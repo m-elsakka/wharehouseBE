@@ -10,12 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.NoRepositoryBean;
 
-/**
- *
- * @author Waleed.mohamed
- * @param <T>
- * @param <ID>
- */
+
 @NoRepositoryBean
 public interface GenericJPARepository<T extends Serializable> extends JpaRepository<T, Serializable>, JpaSpecificationExecutor {
 

@@ -16,10 +16,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-/**
- *
- * @author Rawan.Ahmed
- */
+
 @Embeddable
 public class StkTransDetailsPK implements Serializable {
 

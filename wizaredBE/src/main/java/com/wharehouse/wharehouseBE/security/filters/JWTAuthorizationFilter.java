@@ -29,15 +29,10 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
-/**
- *
- * @author mohamed.abd-elwadod
- */
+
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
-//    public JWTAuthorizationFilter(AuthenticationManager authManager) {
-//        super(authManager);
-//    }
+
     TokenProvideService tokenProvideService;
 
     public JWTAuthorizationFilter(AuthenticationManager authManager, ApplicationContext applicationContext) {

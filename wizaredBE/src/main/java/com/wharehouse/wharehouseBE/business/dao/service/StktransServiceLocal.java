@@ -10,10 +10,7 @@ import com.wharehouse.wharehouseBE.model.entities.StkTransDetails;
 import com.wharehouse.wharehouseBE.model.entities.StkTransHeader;
 import java.util.List;
 
-/**
- *
- * @author Ahmed.Gaber
- */
+
 public interface StktransServiceLocal {
 
     public void saveTransHeader(StkTransHeader stkTransHeader);

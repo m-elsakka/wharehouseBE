@@ -5,10 +5,7 @@
  */
 package com.wharehouse.wharehouseBE.model.enums;
 
-/**
- *
- * @author waleed.mohamed
- */
+
 public enum SurveyQuestionTypeEnum {
     TEXT(1),
     MCQ(2);

@@ -10,10 +10,7 @@ import com.wharehouse.wharehouseBE.business.dao.common.GenericJPARepository;
 import com.wharehouse.wharehouseBE.security.model.entities.UserAuthority;
 import java.util.List;
 
-/**
- *
- * @author waleed.mohamed
- */
+
 public interface UserAuthorityRepositiry extends GenericJPARepository<UserAuthority> {
 
     List<UserAuthority> findUserAuthorityByUserId(Long userId);

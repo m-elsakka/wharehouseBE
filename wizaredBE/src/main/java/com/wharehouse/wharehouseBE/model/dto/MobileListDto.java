@@ -7,11 +7,7 @@ package com.wharehouse.wharehouseBE.model.dto;
 
 import java.io.Serializable;
 
-/**
- *
- * @author waleed.mohamed
- */
-///Dto for mobile list searching
+
 public class MobileListDto implements Serializable {
 
     private Object listData;

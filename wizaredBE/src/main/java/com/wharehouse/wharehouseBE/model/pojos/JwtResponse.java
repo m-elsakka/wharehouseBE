@@ -5,10 +5,7 @@
  */
 package com.wharehouse.wharehouseBE.model.pojos;
 
-/**
- *
- * @author Rawan.Ahmed
- */
+
 public class JwtResponse {
     private UserValidPojo data;
     private String iat;

@@ -13,10 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
 
-/**
- *
- * @author waleed.mohamed
- */
+
 @Entity
 @Table(name = "user_authority")
 @IdClass(UserAuthorityPK.class)

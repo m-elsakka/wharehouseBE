@@ -23,10 +23,7 @@ import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author Rawan.Ahmed
- */
+
 @Entity
 @Table(name = "STK_TRANS_DETAILS")
 @XmlRootElement

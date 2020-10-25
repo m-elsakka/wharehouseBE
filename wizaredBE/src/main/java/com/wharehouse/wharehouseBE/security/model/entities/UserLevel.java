@@ -16,10 +16,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-/**
- *
- * @author waleed.mohamed
- */
+
 @Entity
 @Table(name = "user_level")
 @NamedQueries({
@@ -76,7 +73,7 @@ public class UserLevel extends CrudBaseEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "com.unilever.teamlead.model.entities.usermanagement.UserLevel[ id=" + id + " ]";
+        return "com.wharehouse.wharehouseBE.security.model.entities.usermanagement.UserLevel[ id=" + id + " ]";
     }
 
 }

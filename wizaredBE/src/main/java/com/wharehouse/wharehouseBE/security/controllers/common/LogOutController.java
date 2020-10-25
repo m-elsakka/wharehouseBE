@@ -28,10 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- *
- * @author Rawan.Ahmed
- */
+
 @RestController
 @RequestMapping("/logoutservice")
 public class LogOutController extends BaseRestController<Users> {

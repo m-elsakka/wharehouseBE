@@ -18,10 +18,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.springframework.data.jpa.domain.Specification;
 
-/**
- *
- * @author Waleed.mohamed
- */
+
 public class UsersSpecifications extends GenericEntitySpecfications<Users> {
 
     public Specification buildLineMangerByLevelSpecification(Integer levelNumber) {

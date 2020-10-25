@@ -22,10 +22,7 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.codec.binary.Base64;
 
-/**
- *
- * @author mohamed.abd-elwadod
- */
+
 public class JWTUtil {
 
       static SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;

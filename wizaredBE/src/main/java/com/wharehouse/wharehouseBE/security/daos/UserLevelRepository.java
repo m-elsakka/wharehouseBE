@@ -10,10 +10,7 @@ import com.wharehouse.wharehouseBE.security.model.entities.UserLevel;
 
 
 
-/**
- *
- * @author waleed.mohamed
- */
+
 public interface UserLevelRepository extends GenericJPARepository<UserLevel> {
 
 }

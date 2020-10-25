@@ -20,11 +20,7 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-/**
- *
- * @author waleed.mohamed
- * @param <T>
- */
+
 public abstract class AbstractSpecification {
 
     public static void appendFilterToQuery(Class entityClass, SearchParPojo searchPar, Root root, List<Predicate> predicates, CriteriaBuilder criteriaBuilder) {

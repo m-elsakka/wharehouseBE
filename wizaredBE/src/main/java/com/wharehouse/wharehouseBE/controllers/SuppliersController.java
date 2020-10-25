@@ -9,10 +9,7 @@ import com.wharehouse.wharehouseBE.model.entities.Suppliers;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- *
- * @author Ahmed.Gaber
- */
+
 @RestController
 @RequestMapping("masterdata/suppliers")
 public class SuppliersController extends BaseRestController<Suppliers>{

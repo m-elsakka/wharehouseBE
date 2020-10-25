@@ -5,10 +5,7 @@
  */
 package com.wharehouse.wharehouseBE.model.pojos;
 
-/**
- *
- * @author karim.omran
- */
+
 public class FilterPojo {
 
     private String fieldName;

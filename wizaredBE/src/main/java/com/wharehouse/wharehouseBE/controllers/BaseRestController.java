@@ -45,13 +45,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-/**
- * This Is Base Class for Crud Operation for domain entities
- *
- * @author Waleed.mohamed
- * @param <T>
- */
-//http://shrestha-manoj.blogspot.com/2014/05/javaxpersistence-vs-orghibernateannoata.html?_sm_au_=iVVHqGr6R07s3mPN
+
 public class BaseRestController<T extends Serializable> {
 
     //<editor-fold defaultstate="collapsed" desc="Properties">

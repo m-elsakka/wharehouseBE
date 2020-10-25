@@ -9,10 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import javax.persistence.MappedSuperclass;
 
-/**
- *
- * @author waleed.mohamed
- */
+
 @MappedSuperclass
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class BaseEntity implements Serializable {

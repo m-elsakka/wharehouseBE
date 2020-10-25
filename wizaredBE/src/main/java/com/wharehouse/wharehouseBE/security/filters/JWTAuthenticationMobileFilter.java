@@ -22,10 +22,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-/**
- *
- * @author mohamed.abd-elwadod
- */
 public class JWTAuthenticationMobileFilter extends UsernamePasswordAuthenticationFilter {
 
     private AuthenticationManager authenticationManager;

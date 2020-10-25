@@ -5,10 +5,7 @@
  */
 package com.wharehouse.wharehouseBE.security.enums;
 
-/**
- *
- * @author waleed.mohamed
- */
+ 
 public enum UserRolesNumberEnum {
     ROLE_ADMIN(1),
     ROLE_SALES_FORCE(2),

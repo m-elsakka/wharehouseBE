@@ -5,10 +5,7 @@
  */
 package com.wharehouse.wharehouseBE.model.enums;
 
-/**
- *
- * @author Waleed.mohamed
- */
+
 public enum CrudOpTypesEnum {
     CREATE(1),
     EDIT(2),

@@ -9,10 +9,7 @@ import com.wharehouse.wharehouseBE.business.dao.common.GenericJPARepository;
 import com.wharehouse.wharehouseBE.security.model.entities.Authority;
 
 
-/**
- *
- * @author waleed.mohamed
- */
+
 public interface AuthorityRepository extends GenericJPARepository<Authority> {
 
 }
